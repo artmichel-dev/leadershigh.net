@@ -61,32 +61,59 @@ export function isValidLocale(locale: string): locale is Locale {
   return [...locales, defaultLocale].includes(locale as Locale)
 }
 
-// Función para obtener el locale de una URL
+// Función para obtener el locale de una URL - MEJORADA
 export function getLocaleFromPathname(pathname: string): Locale {
-  const segments = pathname.split('/')
-  const potentialLocale = segments[1]
+  // Limpiar pathname y dividir en segmentos
+  const cleanPathname = pathname.startsWith('/') ? pathname.slice(1) : pathname
+  const segments = cleanPathname.split('/').filter(Boolean)
   
+  // Si no hay segmentos o el primer segmento no es un locale válido, retornar coreano
+  if (segments.length === 0) {
+    return defaultLocale
+  }
+  
+  const potentialLocale = segments[0]
+  
+  // Verificar si es un locale válido y está en la lista de locales con prefijo
   if (potentialLocale && locales.includes(potentialLocale as any)) {
     return potentialLocale as Locale
   }
   
+  // Si no es un locale válido, asumir que es coreano (sin prefijo)
   return defaultLocale
 }
 
-// Función para generar URLs con locale
+// Función para generar URLs con locale - MEJORADA
 export function getLocalizedPath(pathname: string, locale: Locale): string {
-  // Si es el idioma por defecto (coreano), no agregar prefijo
+  // Limpiar pathname
+  let cleanPath = pathname.startsWith('/') ? pathname : `/${pathname}`
+  
+  // Si es coreano (idioma por defecto), remover cualquier prefijo de locale existente
   if (locale === defaultLocale) {
-    return pathname
+    // Si la ruta actual tiene un prefijo de locale, removerlo
+    const segments = cleanPath.split('/').filter(Boolean)
+    if (segments.length > 0 && locales.includes(segments[0] as any)) {
+      // Remover el primer segmento (locale) y reconstruir la ruta
+      const newSegments = segments.slice(1)
+      return newSegments.length > 0 ? `/${newSegments.join('/')}` : '/'
+    }
+    // Si no tiene prefijo, devolver tal como está
+    return cleanPath
   }
   
-  // Si el pathname ya tiene un locale, reemplazarlo
-  const segments = pathname.split('/')
-  if (segments[1] && locales.includes(segments[1] as any)) {
-    segments[1] = locale
-    return segments.join('/')
+  // Para otros idiomas, agregar o reemplazar el prefijo
+  const segments = cleanPath.split('/').filter(Boolean)
+  
+  // Si ya tiene un prefijo de locale, reemplazarlo
+  if (segments.length > 0 && locales.includes(segments[0] as any)) {
+    segments[0] = locale
+    return `/${segments.join('/')}`
   }
   
-  // Agregar el nuevo locale
-  return `/${locale}${pathname}`
+  // Si no tiene prefijo, agregarlo
+  if (segments.length === 0) {
+    return `/${locale}`
+  }
+  
+  return `/${locale}/${segments.join('/')}`
 } 

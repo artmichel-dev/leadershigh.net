@@ -5,45 +5,43 @@ import { locales, defaultLocale, isValidLocale } from '@/lib/i18n'
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname
   
-  // Verificar si ya tiene un locale en la URL
-  const pathnameHasLocale = locales.some(
-    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
-  )
-  
-  // Si ya tiene un locale válido, continuar
-  if (pathnameHasLocale) {
-    return NextResponse.next()
-  }
-  
   // Verificar si está accediendo a archivos estáticos
   if (
     pathname.startsWith('/_next') ||
     pathname.startsWith('/api') ||
-    pathname.includes('.')
+    pathname.includes('.') ||
+    pathname.startsWith('/favicon')
   ) {
     return NextResponse.next()
   }
   
-  // Detectar idioma preferido del navegador
-  const acceptLanguage = request.headers.get('accept-language') || ''
-  let preferredLocale = defaultLocale
+  console.log('Middleware processing:', pathname)
   
-  // Buscar coincidencias con nuestros idiomas soportados
-  for (const locale of locales) {
-    if (acceptLanguage.includes(locale)) {
-      preferredLocale = locale
-      break
-    }
+  // Extraer segmentos de la URL
+  const segments = pathname.split('/').filter(Boolean)
+  
+  // Si no hay segmentos (ruta raíz), servir coreano
+  if (segments.length === 0) {
+    console.log('Root path, serving Korean')
+    return NextResponse.next()
   }
   
-  // Solo redirigir si no es el idioma por defecto (coreano)
-  // El coreano se sirve desde las rutas sin prefijo
-  if (preferredLocale !== defaultLocale) {
-    const redirectUrl = new URL(`/${preferredLocale}${pathname}`, request.url)
-    return NextResponse.redirect(redirectUrl)
+  const firstSegment = segments[0]
+  
+  // Verificar si el primer segmento es un locale válido
+  if (isValidLocale(firstSegment)) {
+    console.log('Valid locale found:', firstSegment)
+    return NextResponse.next()
   }
   
-  // Para rutas en coreano (idioma por defecto), continuar sin redirección
+  // Si el primer segmento NO es un locale válido, verificar si es muy corto (posible error)
+  if (firstSegment.length <= 2 && !firstSegment.match(/^[a-zA-Z0-9-_]+$/)) {
+    console.log('Invalid/malformed segment detected:', firstSegment, 'redirecting to root')
+    return NextResponse.redirect(new URL('/', request.url))
+  }
+  
+  // Para rutas sin locale (como /about, /pricing, etc.), servir en coreano
+  console.log('No locale prefix, serving Korean for:', pathname)
   return NextResponse.next()
 }
 

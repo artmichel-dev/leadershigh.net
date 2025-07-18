@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import { Menu, MenuButton, MenuItem, MenuItems, Transition } from '@headlessui/react'
 import { ChevronDownIcon, GlobeAltIcon } from '@heroicons/react/16/solid'
-import { languages, getLocaleFromPathname, getLocalizedPath, type Locale } from '@/lib/i18n'
+import { languages, getLocaleFromPathname, getLocalizedPath, type Locale, locales } from '@/lib/i18n'
 import { cn } from '@/lib/utils'
 
 export function LanguageSwitcher() {
@@ -13,16 +13,30 @@ export function LanguageSwitcher() {
   const currentLocale = getLocaleFromPathname(pathname)
   
   const handleLanguageChange = (newLocale: Locale) => {
-    // Remover el locale actual del pathname para obtener la ruta base
-    let basePath = pathname
-    if (pathname.startsWith('/en/') || pathname.startsWith('/zh/') || 
-        pathname.startsWith('/ja/') || pathname.startsWith('/vi/') || 
-        pathname.startsWith('/es/')) {
-      basePath = pathname.substring(3) // Remover el locale del inicio
+    console.log('Changing language from', currentLocale, 'to', newLocale, 'current path:', pathname)
+    
+    // Obtener la ruta base sin el locale actual
+    let basePath = '/'
+    
+    // Si la URL actual tiene un prefijo de locale, removerlo para obtener la ruta base
+    const segments = pathname.split('/').filter(Boolean)
+    
+    if (segments.length > 0 && locales.includes(segments[0] as any)) {
+      // Tenemos un prefijo de locale, removerlo
+      const pathSegments = segments.slice(1)
+      basePath = pathSegments.length > 0 ? `/${pathSegments.join('/')}` : '/'
+    } else {
+      // No hay prefijo de locale (estamos en coreano), usar la ruta completa
+      basePath = pathname
     }
+    
+    console.log('Base path extracted:', basePath)
     
     // Generar la nueva URL con el locale seleccionado
     const newPath = getLocalizedPath(basePath, newLocale)
+    console.log('New path generated:', newPath)
+    
+    // Navegar a la nueva ruta
     router.push(newPath)
   }
 
