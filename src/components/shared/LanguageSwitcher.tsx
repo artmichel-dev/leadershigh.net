@@ -13,8 +13,6 @@ export function LanguageSwitcher() {
   const currentLocale = getLocaleFromPathname(pathname)
   
   const handleLanguageChange = (newLocale: Locale) => {
-    console.log('Changing language from', currentLocale, 'to', newLocale, 'current path:', pathname)
-    
     // Obtener la ruta base sin el locale actual
     let basePath = '/'
     
@@ -30,11 +28,8 @@ export function LanguageSwitcher() {
       basePath = pathname
     }
     
-    console.log('Base path extracted:', basePath)
-    
     // Generar la nueva URL con el locale seleccionado
     const newPath = getLocalizedPath(basePath, newLocale)
-    console.log('New path generated:', newPath)
     
     // Navegar a la nueva ruta
     router.push(newPath)

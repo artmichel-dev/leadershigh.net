@@ -4,7 +4,7 @@ import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
 import { getDictionary, type Locale, languages, isValidLocale, defaultLocale } from '@/lib/i18n'
 import { redirect } from 'next/navigation'
-import '@/styles/globals.css'
+// REMOVIDO: import '@/styles/globals.css' - Esto causa conflictos con el layout principal
 
 type Props = {
   children: React.ReactNode

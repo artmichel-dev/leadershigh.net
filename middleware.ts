@@ -5,24 +5,23 @@ import { locales, defaultLocale, isValidLocale } from '@/lib/i18n'
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname
   
-  // Verificar si está accediendo a archivos estáticos
+  // Verificar si está accediendo a archivos estáticos - MEJORADO
   if (
     pathname.startsWith('/_next') ||
     pathname.startsWith('/api') ||
-    pathname.includes('.') ||
-    pathname.startsWith('/favicon')
+    pathname.startsWith('/favicon') ||
+    pathname.includes('.') || // Cualquier archivo con extensión
+    pathname.startsWith('/static') ||
+    pathname.startsWith('/assets')
   ) {
     return NextResponse.next()
   }
-  
-  console.log('Middleware processing:', pathname)
   
   // Extraer segmentos de la URL
   const segments = pathname.split('/').filter(Boolean)
   
   // Si no hay segmentos (ruta raíz), servir coreano
   if (segments.length === 0) {
-    console.log('Root path, serving Korean')
     return NextResponse.next()
   }
   
@@ -30,18 +29,15 @@ export function middleware(request: NextRequest) {
   
   // Verificar si el primer segmento es un locale válido
   if (isValidLocale(firstSegment)) {
-    console.log('Valid locale found:', firstSegment)
     return NextResponse.next()
   }
   
   // Si el primer segmento NO es un locale válido, verificar si es muy corto (posible error)
   if (firstSegment.length <= 2 && !firstSegment.match(/^[a-zA-Z0-9-_]+$/)) {
-    console.log('Invalid/malformed segment detected:', firstSegment, 'redirecting to root')
     return NextResponse.redirect(new URL('/', request.url))
   }
   
   // Para rutas sin locale (como /about, /pricing, etc.), servir en coreano
-  console.log('No locale prefix, serving Korean for:', pathname)
   return NextResponse.next()
 }
 
@@ -53,7 +49,8 @@ export const config = {
      * - _next/static (archivos estáticos)
      * - _next/image (archivos de optimización de imágenes)
      * - favicon.ico (favicon)
+     * - archivos con extensión (CSS, JS, etc.)
      */
-    '/((?!api|_next/static|_next/image|favicon.ico).*)',
+    '/((?!api|_next/static|_next/image|favicon.ico|.*\\..*).*)',
   ],
 } 
