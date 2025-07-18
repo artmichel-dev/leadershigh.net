@@ -1,7 +1,4 @@
-import clsx from 'clsx'
 import type { Metadata } from 'next'
-import { GeistSans } from 'geist/font/sans'
-import { GeistMono } from 'geist/font/mono'
 import { getDictionary, type Locale, languages, isValidLocale, defaultLocale } from '@/lib/i18n'
 import { redirect } from 'next/navigation'
 import { LocaleProvider } from '@/components/shared/LocaleProvider'
