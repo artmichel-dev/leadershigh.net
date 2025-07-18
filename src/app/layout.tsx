@@ -20,6 +20,10 @@ export async function generateMetadata(): Promise<Metadata> {
       description: dictionary.metadata.description,
       locale: defaultLocale,
     },
+    other: {
+      // DNS prefetch for external resources
+      'dns-prefetch': '//www.youtube.com, //fonts.googleapis.com',
+    },
   }
 }
 

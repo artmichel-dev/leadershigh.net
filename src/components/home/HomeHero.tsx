@@ -103,7 +103,9 @@ export const HomeHero = () => {
             alt=''
             className='h-full w-full object-contain'
             sizes='100vw'
-            priority
+            priority={false}
+            loading='lazy'
+            quality={75}
           />
         </div>
 
@@ -112,7 +114,8 @@ export const HomeHero = () => {
           alt='App screenshot'
           className='relative h-auto w-full rounded-lg'
           sizes='(max-width: 1280px) 100vw, 1200px'
-          priority
+          priority={true}
+          quality={85}
         />
       </div>
 

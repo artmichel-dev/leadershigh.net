@@ -3,7 +3,10 @@
 import dynamic from 'next/dynamic'
 import { useEffect, useRef, useState } from 'react'
 
-const Odometer = dynamic(() => import('react-odometerjs'), { ssr: false })
+const Odometer = dynamic(() => import('react-odometerjs'), { 
+  ssr: false,
+  loading: () => <span className="animate-pulse">---</span>
+})
 
 export const Stats = () => {
   const [stats, setStats] = useState({
@@ -12,6 +15,7 @@ export const Stats = () => {
     projectsCreated: 69420,
   })
 
+  const [isVisible, setIsVisible] = useState(false)
   const statsRef = useRef(stats)
   statsRef.current = stats
 
@@ -20,6 +24,7 @@ export const Stats = () => {
   useEffect(() => {
     const fetchMockStats = (): Promise<typeof statsRef.current> => {
       return new Promise((resolve) => {
+        // Reduced timeout for faster initial load
         setTimeout(() => {
           resolve({
             activeUsers:
@@ -29,7 +34,7 @@ export const Stats = () => {
             projectsCreated:
               statsRef.current.projectsCreated + Math.floor(Math.random() * 15),
           })
-        }, 500)
+        }, 200) // Reduced from 500ms
       })
     }
 
@@ -42,19 +47,20 @@ export const Stats = () => {
     let interval: NodeJS.Timeout
 
     const observer = new IntersectionObserver(
-      (entries, observer) => {
+      (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
+          if (entry.isIntersecting && !isVisible) {
+            setIsVisible(true)
             updateStats()
-            interval = setInterval(updateStats, 7000)
-
-            observer.unobserve(entry.target)
+            // Reduced update frequency from 7000ms to 10000ms
+            interval = setInterval(updateStats, 10000)
           }
         })
       },
       {
         root: null,
-        threshold: 0.5,
+        threshold: 0.1, // Reduced threshold for earlier triggering
+        rootMargin: '50px', // Start loading 50px before entering viewport
       }
     )
 
@@ -62,8 +68,11 @@ export const Stats = () => {
       observer.observe(statsSectionRef.current)
     }
 
-    return () => clearInterval(interval)
-  }, [])
+    return () => {
+      clearInterval(interval)
+      observer.disconnect()
+    }
+  }, [isVisible])
 
   return (
     <dl

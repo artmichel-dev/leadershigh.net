@@ -73,6 +73,20 @@ code .line:not(:last-child)::before {
   );
 }
 
+/* Shimmer animation for loading states */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite;
+}
+
 /* Firefox specific styles */
 @-moz-document url-prefix() {
   .hover-gradient {

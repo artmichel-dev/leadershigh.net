@@ -5,52 +5,48 @@ import { locales, defaultLocale, isValidLocale } from '@/lib/i18n'
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname
   
-  // Verificar si está accediendo a archivos estáticos - MEJORADO
+  // Early return for static files and API routes
   if (
     pathname.startsWith('/_next') ||
     pathname.startsWith('/api') ||
     pathname.startsWith('/favicon') ||
-    pathname.includes('.') || // Cualquier archivo con extensión
+    pathname.includes('.') ||
     pathname.startsWith('/static') ||
     pathname.startsWith('/assets')
   ) {
     return NextResponse.next()
   }
   
-  // Extraer segmentos de la URL
-  const segments = pathname.split('/').filter(Boolean)
+  // Early return for root path
+  if (pathname === '/') {
+    return NextResponse.next()
+  }
   
-  // Si no hay segmentos (ruta raíz), servir coreano
+  // Extract segments efficiently
+  const segments = pathname.split('/').filter(Boolean)
   if (segments.length === 0) {
     return NextResponse.next()
   }
   
   const firstSegment = segments[0]
   
-  // Verificar si el primer segmento es un locale válido
+  // Check if first segment is a valid locale
   if (isValidLocale(firstSegment)) {
     return NextResponse.next()
   }
   
-  // Si el primer segmento NO es un locale válido, verificar si es muy corto (posible error)
+  // Handle very short segments that might be errors
   if (firstSegment.length <= 2 && !firstSegment.match(/^[a-zA-Z0-9-_]+$/)) {
     return NextResponse.redirect(new URL('/', request.url))
   }
   
-  // Para rutas sin locale (como /about, /pricing, etc.), servir en coreano
+  // For routes without locale, serve in Korean
   return NextResponse.next()
 }
 
 export const config = {
   matcher: [
-    /*
-     * Coincidir con todas las rutas de solicitud excepto las que comienzan con:
-     * - api (rutas de API)
-     * - _next/static (archivos estáticos)
-     * - _next/image (archivos de optimización de imágenes)
-     * - favicon.ico (favicon)
-     * - archivos con extensión (CSS, JS, etc.)
-     */
-    '/((?!api|_next/static|_next/image|favicon.ico|.*\\..*).*)',
+    // More specific matcher to reduce unnecessary processing
+    '/((?!_next/static|_next/image|favicon.ico|.*\\..*).*)',
   ],
 } 

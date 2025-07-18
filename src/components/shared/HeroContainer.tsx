@@ -2,6 +2,7 @@ import Image from 'next/image'
 import { Header } from '@/components/header/Header'
 import { StarField } from '@/components/shared/StarField'
 import { cn } from '@/lib/utils'
+
 import spaceWavesPng from '@/images/hero-space-waves.png'
 
 interface HeroContainerProps {
@@ -10,7 +11,7 @@ interface HeroContainerProps {
   bgGradientClassName?: string
   innerContainerClassName?: string
   className?: string
-  children?: React.ReactNode
+  children: React.ReactNode
 }
 
 export const HeroContainer = ({
@@ -34,7 +35,9 @@ export const HeroContainer = ({
             bgGradientClassName
           )}
           sizes='100vw'
-          priority
+          priority={false} // Changed from priority to false for better performance
+          loading='lazy'
+          quality={75} // Reduced quality for background image
         />
 
         {starField && (
