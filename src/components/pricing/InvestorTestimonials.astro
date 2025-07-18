@@ -64,7 +64,7 @@ const testimonials = [
       />
     </div>
     <p
-      class="text-center text-[13px] font-extrabold uppercase tracking-widest text-violet-50/80 sm:text-sm"
+      class="text-center text-[13px] font-extrabold uppercase tracking-widest text-blue-50/80 sm:text-sm"
     >
       Funded by industry leading investors
     </p>
@@ -86,11 +86,11 @@ const testimonials = [
                 'absolute inset-y-0 left-0 h-full w-px bg-gradient-to-b',
                 index % 2 === 0
                   ? Math.floor(index / 2) % 2 === 0
-                    ? 'from-violet-200/[0.025] to-violet-200/[0.1]'
-                    : 'from-violet-200/[0.05] to-violet-200/[0.1] md:from-violet-200/[0.1] md:to-violet-200/[0.025]'
+                    ? 'from-blue-200/[0.025] to-blue-200/[0.1]'
+                    : 'from-blue-200/[0.05] to-blue-200/[0.1] md:from-blue-200/[0.1] md:to-blue-200/[0.025]'
                   : Math.floor(index / 2) % 2 === 0
-                    ? 'from-violet-200/[0.1] to-violet-200/[0.05]'
-                    : 'from-violet-200/[0.1] to-violet-200/[0.025] md:from-violet-200/[0.05] md:to-violet-200/[0.1]',
+                    ? 'from-blue-200/[0.1] to-blue-200/[0.05]'
+                    : 'from-blue-200/[0.1] to-blue-200/[0.025] md:from-blue-200/[0.05] md:to-blue-200/[0.1]',
               ]}
             />
             {/* bottom borders */}
@@ -102,11 +102,11 @@ const testimonials = [
                 testimonials.length === index + 1 && 'hidden',
                 index % 2 === 0
                   ? Math.floor(index / 2) % 2 === 0
-                    ? 'from-violet-200/[0.025] to-violet-200/[0.1]'
-                    : 'from-violet-200/[0.1] to-violet-200/[0.025]'
+                    ? 'from-blue-200/[0.025] to-blue-200/[0.1]'
+                    : 'from-blue-200/[0.1] to-blue-200/[0.025]'
                   : Math.floor(index / 2) % 2 === 0
-                    ? 'from-violet-200/[0.1] to-violet-200/[0.025]'
-                    : 'from-violet-200/[0.025] to-violet-200/[0.1]',
+                    ? 'from-blue-200/[0.1] to-blue-200/[0.025]'
+                    : 'from-blue-200/[0.025] to-blue-200/[0.1]',
               ]}
             />
             {/* Right borders */}
@@ -115,14 +115,14 @@ const testimonials = [
                 'absolute inset-y-0 right-0 h-full w-px bg-gradient-to-b',
                 index % 2 === 1
                   ? Math.floor(index / 2) % 2 === 0
-                    ? 'from-violet-200/[0.05] to-violet-200/[0.025] md:from-violet-200/[0.025] md:to-violet-200/[0.1]'
-                    : 'from-violet-200/[0.05] to-violet-200/[0.1] md:from-violet-200/[0.1] md:to-violet-200/[0.025]'
+                    ? 'from-blue-200/[0.05] to-blue-200/[0.025] md:from-blue-200/[0.025] md:to-blue-200/[0.1]'
+                    : 'from-blue-200/[0.05] to-blue-200/[0.1] md:from-blue-200/[0.1] md:to-blue-200/[0.025]'
                   : Math.floor(index / 2) % 2 === 0
-                    ? 'from-violet-200/[0.1] to-violet-200/[0.05] md:hidden'
-                    : 'from-violet-200/[0.025] to-violet-200/[0.05] md:hidden',
+                    ? 'from-blue-200/[0.1] to-blue-200/[0.05] md:hidden'
+                    : 'from-blue-200/[0.025] to-blue-200/[0.05] md:hidden',
               ]}
             />
-            <span class="absolute -left-[0.5px] top-1/2 h-8 w-px -translate-y-1/2 translate-x-1/2 bg-violet-100/40" />
+            <span class="absolute -left-[0.5px] top-1/2 h-8 w-px -translate-y-1/2 translate-x-1/2 bg-blue-100/40" />
             <div class="relative h-full w-full overflow-hidden">
               <div
                 class="absolute bottom-1/2 left-1/2 right-0 top-0 opacity-0 duration-300 ease-in-out group-hover:opacity-100"
@@ -130,7 +130,7 @@ const testimonials = [
               >
                 <StarField density="high" maxRadius={1.75} minRadius={1} />
               </div>
-              <div class="hover-gradient absolute inset-0 -z-10 bg-gradient-to-b from-[#575EFF]/20 to-[#E478FF]/20 opacity-0 blur-4xl duration-300 ease-in-out group-hover:opacity-100" />
+              <div class="hover-gradient absolute inset-0 -z-10 bg-gradient-to-b from-[#3B82F6]/20 to-[#06B6D4]/20 opacity-0 blur-4xl duration-300 ease-in-out group-hover:opacity-100" />
               <div class="relative h-full w-full px-6 py-8 lg:p-12">
                 <Image
                   src={testimonial.companyLogo.image}

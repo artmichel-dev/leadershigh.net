@@ -151,7 +151,7 @@ const pathname = Astro.url.pathname.replace(/(?<=.)\/$/, '')
     :style="`width: ${windowWidth > 768 ? (showButton ? pillExpandedWidth + 'px' : pillWidth + 'px') : '100%'}`"
   >
     <div
-      class="flex h-full w-full items-center justify-between rounded-full border border-violet-200/[.06] pl-[18px] pr-5 text-violet-50 md:w-fit md:justify-normal md:px-1.5"
+      class="flex h-full w-full items-center justify-between rounded-full border border-blue-200/[.06] pl-[18px] pr-5 text-blue-50 md:w-fit md:justify-normal md:px-1.5"
     >
       {/* Logo mobile */}
       <div class="flex shrink-0 items-center md:hidden">
@@ -180,13 +180,13 @@ const pathname = Astro.url.pathname.replace(/(?<=.)\/$/, '')
             class:list={[
               'relative hidden h-full items-center px-3 py-2.5 text-sm duration-200 ease-in-out md:inline-flex lg:px-4',
               pathname === link.href
-                ? 'font-semibold text-violet-400 drop-shadow-[-4px_-4px_6px_rgba(196,181,253,0.2)]'
-                : 'font-medium text-violet-50 drop-shadow-[-4px_-4px_6px_rgba(237,233,254,0.2)] hover:text-violet-400/95',
+                ? 'font-semibold text-cyan-400 drop-shadow-[-4px_-4px_6px_rgba(34,211,238,0.2)]'
+                : 'font-medium text-blue-50 drop-shadow-[-4px_-4px_6px_rgba(219,234,254,0.2)] hover:text-cyan-400/95',
             ]}
           >
             {link.label}
             {pathname == link.href && (
-              <span class="absolute -bottom-px left-2 right-2 h-px bg-gradient-to-r from-violet-400/0 via-violet-400/80 to-violet-400/0" />
+              <span class="absolute -bottom-px left-2 right-2 h-px bg-gradient-to-r from-cyan-400/0 via-cyan-400/80 to-cyan-400/0" />
             )}
           </a>
         ))
@@ -196,7 +196,7 @@ const pathname = Astro.url.pathname.replace(/(?<=.)\/$/, '')
       <button
         type="button"
         class="group relative hidden h-full items-center px-3 py-2.5 text-sm font-medium outline-none duration-200 ease-in-out md:inline-flex lg:px-4"
-        :class="pagesDropdownOpen ? 'text-violet-400 drop-shadow-[-4px_-4px_6px_rgba(196,181,253,0.2)]' : 'text-violet-50 drop-shadow-[-4px_-4px_6px_rgba(237,233,254,0.2)] hover:text-violet-400/95'"
+        :class="pagesDropdownOpen ? 'text-cyan-400 drop-shadow-[-4px_-4px_6px_rgba(34,211,238,0.2)]' : 'text-blue-50 drop-shadow-[-4px_-4px_6px_rgba(219,234,254,0.2)] hover:text-cyan-400/95'"
         @click="toggleDropdown()"
         :aria-expanded="pagesDropdownOpen"
         x-ref="pagesDropdownButton"
@@ -206,7 +206,7 @@ const pathname = Astro.url.pathname.replace(/(?<=.)\/$/, '')
         <Icon
           name="heroicons:chevron-down-16-solid"
           class="ml-1 h-4.5 w-4.5 duration-300"
-          :class="pagesDropdownOpen ? 'rotate-180 text-violet-400/90' : 'text-violet-50/90 group-hover:text-violet-400/80'"
+          :class="pagesDropdownOpen ? 'rotate-180 text-cyan-400/90' : 'text-blue-50/90 group-hover:text-cyan-400/80'"
         />
       </button>
 
@@ -251,7 +251,7 @@ const pathname = Astro.url.pathname.replace(/(?<=.)\/$/, '')
   {/* Pages dropdown */}
   <div
     style="display: none"
-    class="fixed z-20 hidden w-48 space-y-0.5 rounded-lg bg-[#1F1F24]/70 py-2.5 shadow-inner-blur outline-none backdrop-blur-lg backdrop-brightness-[85%] ease-in-out after:absolute after:inset-0 after:rounded-lg after:border after:border-violet-200/[.06] focus:outline-none md:block"
+    class="fixed z-20 hidden w-48 space-y-0.5 rounded-lg bg-[#1F1F24]/70 py-2.5 shadow-inner-blur outline-none backdrop-blur-lg backdrop-brightness-[85%] ease-in-out after:absolute after:inset-0 after:rounded-lg after:border after:border-blue-200/[.06] focus:outline-none md:block"
     x-show="pagesDropdownOpen"
     x-transition:enter="transition duration-300 ease-out"
     x-transition:enter-start="opacity-0 -translate-y-2"
@@ -266,18 +266,18 @@ const pathname = Astro.url.pathname.replace(/(?<=.)\/$/, '')
       pages.map((link) => (
         <a
           href={link.href}
-          class="group relative z-10 block text-nowrap px-4 py-2 text-sm font-medium text-violet-50 drop-shadow-[-4px_-4px_6px_rgba(237,233,254,0.2)] duration-200 ease-in-out hover:text-violet-400/95 hover:shadow-inner-blur-light hover:drop-shadow-[-4px_-4px_6px_rgba(196,181,253,0.2)]"
+          class="group relative z-10 block text-nowrap px-4 py-2 text-sm font-medium text-blue-50 drop-shadow-[-4px_-4px_6px_rgba(219,234,254,0.2)] duration-200 ease-in-out hover:text-cyan-400/95 hover:shadow-inner-blur-light hover:drop-shadow-[-4px_-4px_6px_rgba(34,211,238,0.2)]"
         >
           <span class="flex items-center">
             {link.icon && (
               <Icon
                 name={link.icon}
-                class="mr-2 h-4 w-4 text-violet-200/60 group-hover:text-violet-300/80"
+                class="mr-2 h-4 w-4 text-blue-200/60 group-hover:text-cyan-300/80"
               />
             )}
             {link.label}
           </span>
-          <span class="absolute inset-y-0 left-0 w-px bg-gradient-to-b from-violet-400/0 via-violet-400/90 to-violet-400/0 opacity-0 duration-200 ease-in-out group-hover:opacity-100" />
+          <span class="absolute inset-y-0 left-0 w-px bg-gradient-to-b from-cyan-400/0 via-cyan-400/90 to-cyan-400/0 opacity-0 duration-200 ease-in-out group-hover:opacity-100" />
         </a>
       ))
     }

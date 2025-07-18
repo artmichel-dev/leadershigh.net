@@ -246,7 +246,7 @@ const planLabels: Plan[] = ['starter', 'pro', 'enterprise']
 ---
 
 <section
-  class="relative overflow-hidden bg-[linear-gradient(rgba(24,24,27,0.95),rgba(24,24,27,0.95)),linear-gradient(#2E1065,#2E1065)] pb-16 pt-20 sm:py-24 lg:py-28"
+  class="relative overflow-hidden bg-[linear-gradient(rgba(24,24,27,0.95),rgba(24,24,27,0.95)),linear-gradient(#1E3A8A,#1E3A8A)] pb-16 pt-20 sm:py-24 lg:py-28"
 >
   <div
     class="absolute left-0 top-0 w-full max-w-7xl -translate-x-1/2 -translate-y-1/2"
@@ -288,7 +288,7 @@ const planLabels: Plan[] = ['starter', 'pro', 'enterprise']
     {/* Heading */}
     <div class="relative flex flex-col items-center">
       <h1
-        class="max-w-4xl text-center text-4xl font-bold leading-extratight text-violet-100 sm:text-5xl sm:leading-extratight"
+        class="max-w-4xl text-center text-4xl font-bold leading-extratight text-blue-100 sm:text-5xl sm:leading-extratight"
       >
         Compare all plan details
       </h1>
@@ -304,18 +304,18 @@ const planLabels: Plan[] = ['starter', 'pro', 'enterprise']
             pricingTableData.map((category) => (
               <table class="min-w-full">
                 <thead>
-                  <tr class="border-b border-violet-200/10">
+                  <tr class="border-b border-blue-200/10">
                     <th
                       scope="col"
                       class="text-left text-sm font-semibold text-white sm:pl-2"
                     >
                       <div class="inline-flex w-max rounded-full bg-zinc-950/[.01] shadow-inner-blur">
-                        <div class="flex h-full w-full items-center space-x-2 rounded-full border border-violet-200/[.06] px-4 py-1.5">
+                        <div class="flex h-full w-full items-center space-x-2 rounded-full border border-blue-200/[.06] px-4 py-1.5">
                           <Icon
                             name={category.icon}
-                            class="h-[14px] w-[14px] text-violet-200"
+                            class="h-[14px] w-[14px] text-blue-200"
                           />
-                          <span class="text-sm font-medium text-violet-100 drop-shadow-[-12px_-4px_6px_rgba(237,233,254,0.2)]">
+                          <span class="text-sm font-medium text-blue-100 drop-shadow-[-12px_-4px_6px_rgba(219,234,254,0.2)]">
                             {category.category}
                           </span>
                         </div>
@@ -327,7 +327,7 @@ const planLabels: Plan[] = ['starter', 'pro', 'enterprise']
                         class:list={[
                           'flex-1 text-nowrap px-3 py-6 text-center text-sm font-semibold',
                           planLabel === 'pro'
-                            ? 'text-violet-400'
+                            ? 'text-cyan-400'
                             : 'text-zinc-300',
                         ]}
                       >
@@ -339,17 +339,17 @@ const planLabels: Plan[] = ['starter', 'pro', 'enterprise']
                 </thead>
                 <tbody>
                   {category.features.map((feature, rowIndex) => (
-                    <tr class="w-full border-b border-violet-200/[0.06]">
+                    <tr class="w-full border-b border-blue-200/[0.06]">
                       <td class="whitespace-nowrap py-5 pl-6 text-left text-sm font-medium text-white sm:py-6 sm:pl-8">
                         {feature.name}
                       </td>
                       {planLabels.map((plan, planIndex) => (
                         <td
                           class:list={[
-                            'relative flex-1 justify-center whitespace-nowrap px-4 py-5 text-center text-sm leading-4 text-zinc-200 before:absolute before:inset-y-0 before:left-0 before:h-full before:w-px before:bg-gradient-to-b after:absolute after:left-[0.5px] after:top-1/2 after:h-3.5 after:w-px after:-translate-y-1/2 after:translate-x-[-0.5px] after:bg-gradient-to-b after:from-violet-200/10 after:via-violet-300/20 after:to-violet-200/10 sm:py-6',
+                            'relative flex-1 justify-center whitespace-nowrap px-4 py-5 text-center text-sm leading-4 text-zinc-200 before:absolute before:inset-y-0 before:left-0 before:h-full before:w-px before:bg-gradient-to-b after:absolute after:left-[0.5px] after:top-1/2 after:h-3.5 after:w-px after:-translate-y-1/2 after:translate-x-[-0.5px] after:bg-gradient-to-b after:from-blue-200/10 after:via-cyan-300/20 after:to-blue-200/10 sm:py-6',
                             (3 * rowIndex + planIndex) % 2
-                              ? 'before:from-violet-200/[0.025] before:to-violet-200/[0.08]'
-                              : 'before:from-violet-200/[0.08] before:to-violet-200/[0.025]',
+                              ? 'before:from-blue-200/[0.025] before:to-blue-200/[0.08]'
+                              : 'before:from-blue-200/[0.08] before:to-blue-200/[0.025]',
                           ]}
                         >
                           {typeof feature.plans[plan] === 'boolean'
@@ -359,8 +359,8 @@ const planLabels: Plan[] = ['starter', 'pro', 'enterprise']
                                   class:list={[
                                     'mx-auto h-3 w-3 shrink-0',
                                     plan === 'pro'
-                                      ? 'text-violet-400'
-                                      : 'text-violet-100',
+                                      ? 'text-cyan-400'
+                                      : 'text-blue-100',
                                   ]}
                                 />
                               )

@@ -91,10 +91,10 @@ const navigation = [
     </div>
   </div>
   <div
-    class="relative left-1/2 top-2 w-[350%] -translate-x-1/2 rounded-t-[100%] bg-gradient-to-r from-transparent via-violet-100/15 to-transparent p-[0.5px] sm:w-[250%] md:top-4 md:w-[200%] lg:top-10 lg:w-[150%] xl:w-[125%]"
+    class="relative left-1/2 top-2 w-[350%] -translate-x-1/2 rounded-t-[100%] bg-gradient-to-r from-transparent via-blue-100/15 to-transparent p-[0.5px] sm:w-[250%] md:top-4 md:w-[200%] lg:top-10 lg:w-[150%] xl:w-[125%]"
   >
     <div
-      class="h-full w-full rounded-t-[100%] bg-[linear-gradient(rgba(24,24,27,0.9),rgba(24,24,27,0.9)),linear-gradient(#2E1065,#2E1065)] pb-16 pt-24 sm:pt-28 md:pt-32 lg:pt-40"
+      class="h-full w-full rounded-t-[100%] bg-[linear-gradient(rgba(24,24,27,0.9),rgba(24,24,27,0.9)),linear-gradient(#1E3A8A,#1E3A8A)] pb-16 pt-24 sm:pt-28 md:pt-32 lg:pt-40"
     >
       <div class="mx-auto w-screen">
         <div
@@ -115,27 +115,27 @@ const navigation = [
                     </div>
                     <div class="mt-6 flex items-start">
                       <div class="relative flex h-full w-5 justify-center">
-                        <div class="absolute -inset-y-2 left-1/2 w-px -translate-x-1/2 bg-gradient-to-b from-violet-200/[0.12] to-violet-200/[0.04]" />
+                        <div class="absolute -inset-y-2 left-1/2 w-px -translate-x-1/2 bg-gradient-to-b from-blue-200/[0.12] to-blue-200/[0.04]" />
                       </div>
                       <ul class="ml-4 space-y-5">
                         {navCol.links.map((link) => (
                           <li class="group relative flex items-center">
                             <a
                               href={link.href}
-                              class="text-sm font-semibold leading-none text-violet-50 hover:text-violet-400/95"
+                              class="text-sm font-semibold leading-none text-blue-50 hover:text-cyan-400/95"
                             >
                               {link.name}
                             </a>
                             {link.new && (
                               <div class="ml-3 inline-flex w-max rounded-full bg-zinc-950/[.01] shadow-inner-blur">
-                                <div class="flex h-full w-full items-center space-x-2 rounded-full border border-violet-200/[.06] px-2 py-0.5">
-                                  <span class="text-xs font-medium text-violet-200 drop-shadow-[-12px_-4px_6px_rgba(237,233,254,0.2)]">
+                                <div class="flex h-full w-full items-center space-x-2 rounded-full border border-blue-200/[.06] px-2 py-0.5">
+                                  <span class="text-xs font-medium text-blue-200 drop-shadow-[-12px_-4px_6px_rgba(219,234,254,0.2)]">
                                     New
                                   </span>
                                 </div>
                               </div>
                             )}
-                            <span class="absolute -inset-y-1.5 -left-[26.5px] w-px bg-gradient-to-b from-violet-400/0 via-violet-400/90 to-violet-400/0 opacity-0 duration-200 ease-in-out group-hover:opacity-100" />
+                            <span class="absolute -inset-y-1.5 -left-[26.5px] w-px bg-gradient-to-b from-cyan-400/0 via-cyan-400/90 to-cyan-400/0 opacity-0 duration-200 ease-in-out group-hover:opacity-100" />
                           </li>
                         ))}
                       </ul>
@@ -149,7 +149,7 @@ const navigation = [
             class="mt-16 block w-full rounded-2xl bg-zinc-950/[.01] shadow-inner-blur sm:mt-24"
           >
             <div
-              class="flex w-full items-center justify-between space-x-5 rounded-2xl border border-violet-200/[.06] px-6 py-4 sm:space-x-8 sm:px-8 sm:py-6"
+              class="flex w-full items-center justify-between space-x-5 rounded-2xl border border-blue-200/[.06] px-6 py-4 sm:space-x-8 sm:px-8 sm:py-6"
             >
               {/* Logo */}
               <div class="flex shrink-0 items-center">
@@ -174,13 +174,13 @@ const navigation = [
                     <a
                       href={social.href}
                       aria-label={social.ariaLabel}
-                      class="group flex items-center space-x-2 text-sm font-semibold text-violet-50/90 drop-shadow-[-2px_-4px_6px_rgba(237,233,254,0.2)]"
+                      class="group flex items-center space-x-2 text-sm font-semibold text-blue-50/90 drop-shadow-[-2px_-4px_6px_rgba(219,234,254,0.2)]"
                     >
                       <Icon
                         name={`nucleo/${social.name}`}
-                        class="h-4 w-4 duration-200 ease-in-out group-hover:text-violet-300/85"
+                        class="h-4 w-4 duration-200 ease-in-out group-hover:text-cyan-300/85"
                       />
-                      <span class="hidden duration-200 ease-in-out group-hover:text-violet-400/95 lg:inline">
+                      <span class="hidden duration-200 ease-in-out group-hover:text-cyan-400/95 lg:inline">
                         {social.label}
                       </span>
                     </a>

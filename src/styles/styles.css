@@ -30,7 +30,7 @@ code .line:not(:last-child)::before {
 }
 
 .feature.active > div {
-  @apply border-violet-200/[.06];
+  @apply border-blue-200/[.06];
 }
 
 .feature:not(.active) > div {

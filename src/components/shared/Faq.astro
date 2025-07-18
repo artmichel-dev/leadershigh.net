@@ -81,11 +81,11 @@ const faqs = [
         class="flex items-center rounded-full bg-zinc-950/[.01] shadow-inner-blur"
       >
         <div
-          class="flex h-full w-full items-center space-x-2 rounded-full border border-violet-200/[.06] px-4 py-1.5"
+          class="flex h-full w-full items-center space-x-2 rounded-full border border-blue-200/[.06] px-4 py-1.5"
         >
-          <Icon name="nucleo/comments-16" class="h-3.5 w-3.5 text-violet-200" />
+          <Icon name="nucleo/comments-16" class="h-3.5 w-3.5 text-blue-200" />
           <span
-            class="text-sm font-medium text-violet-100 drop-shadow-[-12px_-4px_6px_rgba(237,233,254,0.2)]"
+            class="text-sm font-medium text-blue-100 drop-shadow-[-12px_-4px_6px_rgba(219,234,254,0.2)]"
           >
             FAQs
           </span>
@@ -93,7 +93,7 @@ const faqs = [
       </div>
 
       <h1
-        class="mt-5 max-w-5xl text-center text-4xl font-bold leading-extratight text-violet-100 sm:mt-6 sm:text-5xl sm:leading-extratight"
+        class="mt-5 max-w-5xl text-center text-4xl font-bold leading-extratight text-blue-100 sm:mt-6 sm:text-5xl sm:leading-extratight"
       >
         Frequently asked questions
       </h1>
@@ -102,7 +102,7 @@ const faqs = [
       >
         Haven’t found what you’re looking for? Try Nebula’s wiki or <a
           href="/contact"
-          class="font-medium text-violet-300 underline duration-200 ease-in-out hover:text-violet-400"
+          class="font-medium text-cyan-300 underline duration-200 ease-in-out hover:text-cyan-400"
           >contact us.</a
         >
       </p>
@@ -123,11 +123,11 @@ const faqs = [
                 'absolute inset-y-0 left-0 h-full w-px bg-gradient-to-b',
                 index % 2 === 0
                   ? Math.floor(index / 2) % 2 === 0
-                    ? 'from-violet-200/[0.025] to-violet-200/[0.1]'
-                    : 'from-violet-200/[0.05] to-violet-200/[0.1] md:from-violet-200/[0.1] md:to-violet-200/[0.025]'
+                    ? 'from-blue-200/[0.025] to-blue-200/[0.1]'
+                    : 'from-blue-200/[0.05] to-blue-200/[0.1] md:from-blue-200/[0.1] md:to-blue-200/[0.025]'
                   : Math.floor(index / 2) % 2 === 0
-                    ? 'from-violet-200/[0.1] to-violet-200/[0.05]'
-                    : 'from-violet-200/[0.1] to-violet-200/[0.025] md:from-violet-200/[0.05] md:to-violet-200/[0.1]',
+                    ? 'from-blue-200/[0.1] to-blue-200/[0.05]'
+                    : 'from-blue-200/[0.1] to-blue-200/[0.025] md:from-blue-200/[0.05] md:to-blue-200/[0.1]',
               ]}
             />
             {/* bottom borders */}
@@ -139,11 +139,11 @@ const faqs = [
                 faqs.length === index + 1 && 'hidden',
                 index % 2 === 0
                   ? Math.floor(index / 2) % 2 === 0
-                    ? 'from-violet-200/[0.025] to-violet-200/[0.1]'
-                    : 'from-violet-200/[0.1] to-violet-200/[0.025]'
+                    ? 'from-blue-200/[0.025] to-blue-200/[0.1]'
+                    : 'from-blue-200/[0.1] to-blue-200/[0.025]'
                   : Math.floor(index / 2) % 2 === 0
-                    ? 'from-violet-200/[0.1] to-violet-200/[0.025]'
-                    : 'from-violet-200/[0.025] to-violet-200/[0.1]',
+                    ? 'from-blue-200/[0.1] to-blue-200/[0.025]'
+                    : 'from-blue-200/[0.025] to-blue-200/[0.1]',
               ]}
             />
             {/* Right borders */}
@@ -152,15 +152,15 @@ const faqs = [
                 'absolute inset-y-0 right-0 h-full w-px bg-gradient-to-b',
                 index % 2 === 1
                   ? Math.floor(index / 2) % 2 === 0
-                    ? 'from-violet-200/[0.05] to-violet-200/[0.025] md:from-violet-200/[0.025] md:to-violet-200/[0.1]'
-                    : 'from-violet-200/[0.05] to-violet-200/[0.1] md:from-violet-200/[0.1] md:to-violet-200/[0.025]'
+                    ? 'from-blue-200/[0.05] to-blue-200/[0.025] md:from-blue-200/[0.025] md:to-blue-200/[0.1]'
+                    : 'from-blue-200/[0.05] to-blue-200/[0.1] md:from-blue-200/[0.1] md:to-blue-200/[0.025]'
                   : Math.floor(index / 2) % 2 === 0
-                    ? 'from-violet-200/[0.1] to-violet-200/[0.05] md:hidden'
-                    : 'from-violet-200/[0.025] to-violet-200/[0.05] md:hidden',
+                    ? 'from-blue-200/[0.1] to-blue-200/[0.05] md:hidden'
+                    : 'from-blue-200/[0.025] to-blue-200/[0.05] md:hidden',
               ]}
             />
 
-            <span class="absolute -left-[0.5px] top-1/2 h-8 w-px -translate-y-1/2 translate-x-1/2 bg-violet-100/25 md:bg-violet-100/40" />
+            <span class="absolute -left-[0.5px] top-1/2 h-8 w-px -translate-y-1/2 translate-x-1/2 bg-blue-100/25 md:bg-blue-100/40" />
             <div class="relative h-full w-full overflow-hidden">
               <div
                 class="absolute bottom-1/2 left-1/2 right-0 top-0 opacity-0 duration-300 ease-in-out group-hover:opacity-100"
@@ -168,9 +168,9 @@ const faqs = [
               >
                 <StarField density="high" maxRadius={1.75} minRadius={1} />
               </div>
-              <div class="hover-gradient absolute inset-0 -z-10 bg-gradient-to-b from-[#575EFF]/20 to-[#E478FF]/20 opacity-0 blur-4xl duration-300 ease-in-out group-hover:opacity-100" />
+              <div class="hover-gradient absolute inset-0 -z-10 bg-gradient-to-b from-[#3B82F6]/20 to-[#06B6D4]/20 opacity-0 blur-4xl duration-300 ease-in-out group-hover:opacity-100" />
               <dl class="relative h-full w-full p-5 sm:px-6 sm:py-7 lg:p-12">
-                <dt class="text-base font-bold leading-7 text-violet-50 sm:text-[17px] lg:text-lg">
+                <dt class="text-base font-bold leading-7 text-blue-50 sm:text-[17px] lg:text-lg">
                   {faq.question}
                 </dt>
                 <dd class="mt-2 text-base leading-7 text-zinc-300 sm:mt-3 sm:text-[17px] lg:text-lg lg:leading-8">

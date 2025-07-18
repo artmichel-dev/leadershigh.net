@@ -109,21 +109,21 @@ const pricingPlans = [
           class="flex items-center rounded-full bg-zinc-950/[.01] shadow-inner-blur"
         >
           <div
-            class="flex h-full w-full items-center space-x-2 rounded-full border border-violet-200/[.06] px-4 py-1.5"
+            class="flex h-full w-full items-center space-x-2 rounded-full border border-blue-200/[.06] px-4 py-1.5"
           >
             <Icon
               name="nucleo/tags-stack-16"
-              class="h-3.5 w-3.5 text-violet-200"
+              class="h-3.5 w-3.5 text-blue-200"
             />
             <span
-              class="text-sm font-medium text-violet-100 drop-shadow-[-12px_-4px_6px_rgba(237,233,254,0.2)]"
+              class="text-sm font-medium text-blue-100 drop-shadow-[-12px_-4px_6px_rgba(219,234,254,0.2)]"
             >
               Nebula’s pricing
             </span>
           </div>
         </div>
         <h1
-          class="mt-5 max-w-4xl text-center text-[2.75rem] font-bold leading-[1.125] text-violet-100 sm:text-5xl sm:leading-[1.125] md:text-6xl md:leading-[1.125] lg:text-[64px]"
+          class="mt-5 max-w-4xl text-center text-[2.75rem] font-bold leading-[1.125] text-blue-100 sm:text-5xl sm:leading-[1.125] md:text-6xl md:leading-[1.125] lg:text-[64px]"
         >
           Flexible plans tailored to your needs
         </h1>
@@ -144,18 +144,18 @@ const pricingPlans = [
           class="flex items-center rounded-full bg-zinc-950/[.01] shadow-inner-blur"
         >
           <div
-            class="flex h-full w-full items-center space-x-2 rounded-full border border-violet-200/[.06] px-1 py-1"
+            class="flex h-full w-full items-center space-x-2 rounded-full border border-blue-200/[.06] px-1 py-1"
           >
             <button
               @click="billingType = 'monthly'"
               class="group relative inline-flex items-center overflow-hidden rounded-full px-4 py-2 text-sm font-semibold leading-4 antialiased"
-              :class="billingType === 'monthly' ? 'bg-btn-primary text-violet-50 shadow-btn-primary' : 'text-violet-50 hover:text-white'"
+              :class="billingType === 'monthly' ? 'bg-btn-primary text-blue-50 shadow-btn-primary' : 'text-blue-50 hover:text-white'"
               >Monthly</button
             >
             <button
               @click="billingType = 'annual'"
               class="group relative inline-flex items-center overflow-hidden rounded-full px-4 py-2 text-sm font-semibold leading-4 antialiased"
-              :class="billingType === 'annual' ? 'bg-btn-primary text-violet-50 shadow-btn-primary' : 'text-violet-50 hover:text-white'"
+              :class="billingType === 'annual' ? 'bg-btn-primary text-blue-50 shadow-btn-primary' : 'text-blue-50 hover:text-white'"
               >Annually</button
             >
           </div>
@@ -187,7 +187,7 @@ const pricingPlans = [
                           name="nucleo/o-check-16"
                           class:list={[
                             'mt-1.5 h-4 w-4 shrink-0',
-                            plan.popular ? 'text-violet-400' : 'text-white',
+                            plan.popular ? 'text-cyan-400' : 'text-white',
                           ]}
                         />
                         <p class="text-[17px] leading-7 text-zinc-300">
@@ -215,7 +215,7 @@ const pricingPlans = [
                         name="nucleo/o-check-16"
                         class:list={[
                           'mt-1.5 h-4 w-4 shrink-0',
-                          plan.popular ? 'text-violet-400' : 'text-white',
+                          plan.popular ? 'text-cyan-400' : 'text-white',
                         ]}
                       />
                       <p class="text-[17px] leading-7 text-zinc-300">
