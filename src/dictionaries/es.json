@@ -1,0 +1,32 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "about": "Acerca de",
+    "pricing": "Precios",
+    "contact": "Contacto",
+    "signin": "Iniciar sesión",
+    "signup": "Registrarse"
+  },
+  "hero": {
+    "title": "El nuevo estándar para la colaboración en línea",
+    "subtitle": "Desbloquea el potencial del trabajo remoto con el ecosistema de colaboración avanzado de Nebula. Diseñado para equipos modernos, Nebula agiliza la comunicación, simplifica proyectos y protege tus datos.",
+    "cta": "Comenzar",
+    "watchDemo": "Ver demo"
+  },
+  "common": {
+    "learnMore": "Aprender más",
+    "getStarted": "Comenzar",
+    "signIn": "Iniciar sesión",
+    "signUp": "Registrarse",
+    "contactUs": "Contáctanos",
+    "sendMessage": "Enviar mensaje"
+  },
+  "footer": {
+    "description": "La plataforma de colaboración completa para trabajo remoto",
+    "copyright": "© 2025 Nebula. Todos los derechos reservados."
+  },
+  "metadata": {
+    "title": "Herramientas de colaboración perfectas para equipos modernos - Nebula",
+    "description": "Desbloquea el potencial del trabajo remoto con el ecosistema de colaboración avanzado de Nebula. Diseñado para equipos modernos, agiliza la comunicación, simplifica proyectos y protege datos."
+  }
+} 

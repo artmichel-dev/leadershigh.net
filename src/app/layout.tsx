@@ -2,15 +2,25 @@ import clsx from 'clsx'
 import type { Metadata } from 'next'
 import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
+import { getDictionary, defaultLocale, languages } from '@/lib/i18n'
 import '@/styles/globals.css'
 
-export const metadata: Metadata = {
-  title: {
-    template: '%s - Nebula',
-    default: 'Seamless Collaboration Tools for Modern Teams - Nebula',
-  },
-  description:
-    "Unlock the potential of remote work with Nebula's advanced collaboration ecosystem. Designed for modern teams, Nebula streamlines communication, simplifies projects, and secures your data.",
+// Generar metadata para el idioma coreano (principal)
+export async function generateMetadata(): Promise<Metadata> {
+  const dictionary = await getDictionary(defaultLocale)
+  
+  return {
+    title: {
+      template: '%s - Nebula',
+      default: dictionary.metadata.title,
+    },
+    description: dictionary.metadata.description,
+    openGraph: {
+      title: dictionary.metadata.title,
+      description: dictionary.metadata.description,
+      locale: defaultLocale,
+    },
+  }
 }
 
 export default function RootLayout({
@@ -18,9 +28,12 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const language = languages[defaultLocale]
+  
   return (
     <html
-      lang='en'
+      lang={defaultLocale}
+      dir={language.dir}
       className={clsx('scroll-smooth', GeistSans.variable, GeistMono.variable)}
     >
       <body className='bg-zinc-900'>{children}</body>

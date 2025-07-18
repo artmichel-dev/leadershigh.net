@@ -1,0 +1,32 @@
+{
+  "nav": {
+    "home": "Trang chủ",
+    "about": "Về chúng tôi",
+    "pricing": "Bảng giá",
+    "contact": "Liên hệ",
+    "signin": "Đăng nhập",
+    "signup": "Đăng ký"
+  },
+  "hero": {
+    "title": "Tiêu chuẩn mới cho sự cộng tác trực tuyến",
+    "subtitle": "Mở khóa tiềm năng làm việc từ xa với hệ sinh thái cộng tác tiên tiến của Nebula. Được thiết kế cho các nhóm hiện đại, Nebula hợp lý hóa giao tiếp, đơn giản hóa dự án và bảo mật dữ liệu của bạn.",
+    "cta": "Bắt đầu",
+    "watchDemo": "Xem demo"
+  },
+  "common": {
+    "learnMore": "Tìm hiểu thêm",
+    "getStarted": "Bắt đầu",
+    "signIn": "Đăng nhập",
+    "signUp": "Đăng ký",
+    "contactUs": "Liên hệ chúng tôi",
+    "sendMessage": "Gửi tin nhắn"
+  },
+  "footer": {
+    "description": "Nền tảng cộng tác hoàn chình cho làm việc từ xa",
+    "copyright": "© 2025 Nebula. Tất cả quyền được bảo lưu."
+  },
+  "metadata": {
+    "title": "Công cụ cộng tác liền mạch cho nhóm hiện đại - Nebula",
+    "description": "Mở khóa tiềm năng làm việc từ xa với hệ sinh thái cộng tác tiên tiến của Nebula. Được thiết kế cho các nhóm hiện đại, hợp lý hóa giao tiếp, đơn giản hóa dự án và bảo mật dữ liệu."
+  }
+} 

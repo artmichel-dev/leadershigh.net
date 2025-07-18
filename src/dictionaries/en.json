@@ -1,0 +1,32 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "pricing": "Pricing",
+    "contact": "Contact",
+    "signin": "Sign in",
+    "signup": "Sign up"
+  },
+  "hero": {
+    "title": "Meet the new standard for online collaboration",
+    "subtitle": "Unlock the potential of remote work with Nebula's advanced collaboration ecosystem. Designed for modern teams, Nebula streamlines communication, simplifies projects, and secures your data.",
+    "cta": "Get started",
+    "watchDemo": "Watch demo"
+  },
+  "common": {
+    "learnMore": "Learn more",
+    "getStarted": "Get started",
+    "signIn": "Sign in",
+    "signUp": "Sign up",
+    "contactUs": "Contact us",
+    "sendMessage": "Send message"
+  },
+  "footer": {
+    "description": "The complete collaboration platform for remote work",
+    "copyright": "© 2025 Nebula. All rights reserved."
+  },
+  "metadata": {
+    "title": "Seamless Collaboration Tools for Modern Teams - Nebula",
+    "description": "Unlock the potential of remote work with Nebula's advanced collaboration ecosystem. Designed for modern teams, Nebula streamlines communication, simplifies projects, and secures your data."
+  }
+} 

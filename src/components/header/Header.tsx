@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { NavbarPill } from '@/components/header/NavbarPill'
 import { Container } from '@/components/shared/Container'
 import { Button } from '@/components/shared/Button'
+import { LanguageSwitcher } from '@/components/shared/LanguageSwitcher'
 
 import logo from '@/images/logo.png'
 
@@ -24,7 +25,10 @@ export const Header = () => {
 
           <NavbarPill />
 
-          <div className='hidden items-center md:flex lg:space-x-3 xl:space-x-4'>
+          <div className='hidden items-center gap-3 md:flex lg:gap-4'>
+            {/* Language Switcher */}
+            <LanguageSwitcher />
+            
             <Button
               href='/signin'
               variant='tertiary'
