@@ -4,12 +4,12 @@ import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
 import { getDictionary, type Locale, languages, isValidLocale, defaultLocale } from '@/lib/i18n'
 import { redirect } from 'next/navigation'
-// REMOVIDO: import '@/styles/globals.css' - Esto causa conflictos con el layout principal
+import '@/styles/globals.css'
 
 type Props = {
   children: React.ReactNode
   params: {
-    locale: string // Cambiado a string para validar después
+    locale: string
   }
 }
 
@@ -18,7 +18,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const validLocale: Locale = isValidLocale(params.locale) ? params.locale as Locale : defaultLocale
   
   const dictionary = await getDictionary(validLocale)
-  const language = languages[validLocale]
   
   return {
     title: {

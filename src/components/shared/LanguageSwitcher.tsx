@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import { Menu, MenuButton, MenuItem, MenuItems, Transition } from '@headlessui/react'
 import { ChevronDownIcon, GlobeAltIcon } from '@heroicons/react/16/solid'
-import { languages, getLocaleFromPathname, getLocalizedPath, type Locale, locales } from '@/lib/i18n'
+import { languages, getLocaleFromPathname, getLocalizedPath, type Locale, locales, defaultLocale } from '@/lib/i18n'
 import { cn } from '@/lib/utils'
 
 export function LanguageSwitcher() {
@@ -31,8 +31,19 @@ export function LanguageSwitcher() {
     // Generar la nueva URL con el locale seleccionado
     const newPath = getLocalizedPath(basePath, newLocale)
     
-    // Navegar a la nueva ruta
-    router.push(newPath)
+    // CRITICAL FIX: Usar recarga completa cuando hay cambio de contexto de layout
+    // para evitar problemas de transición entre diferentes contextos de layout
+    const isChangingToKorean = newLocale === defaultLocale
+    const isChangingFromKorean = currentLocale === defaultLocale
+    const isLayoutContextChange = isChangingToKorean || isChangingFromKorean
+    
+    if (isLayoutContextChange) {
+      // Recarga completa para transiciones entre diferentes contextos de layout
+      window.location.href = newPath
+    } else {
+      // Navegación normal entre idiomas del mismo contexto ([locale])
+      router.push(newPath)
+    }
   }
 
   const currentLanguage = languages[currentLocale]
