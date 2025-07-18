@@ -1,0 +1,50 @@
+---
+interface Props {
+  maxRadius?: number
+  minRadius?: number
+  density?: 'low' | 'medium' | 'high'
+}
+
+const { maxRadius = 3, minRadius = 1, density = 'low' } = Astro.props
+
+function generateRandomId() {
+  return 'id-' + Date.now() + '-' + Math.floor(Math.random() * 10000)
+}
+
+const randomId = generateRandomId()
+---
+
+<canvas
+  id={randomId}
+  class="opacity-0 duration-1000 ease-in-out"
+  data-starfield
+  data-max-radius={maxRadius}
+  data-min-radius={minRadius}
+  data-density={density}></canvas>
+
+<script>
+  import { Stars } from '@scripts/starfield.ts'
+
+  // Track star field instances for cleanup
+  let starfieldInstances: Stars[] = []
+
+  // get all canvas elements with data-starfield attribute
+  function initStarfield() {
+    // Clean up existing star fields
+    starfieldInstances.forEach((instance) => {
+      instance.destroy()
+    })
+    starfieldInstances = [] // Clear the array
+
+    const canvases = document.querySelectorAll('[data-starfield]')
+    canvases.forEach((canvas) => {
+      const maxRadius = parseInt(canvas.getAttribute('data-max-radius')!)
+      const minRadius = parseInt(canvas.getAttribute('data-min-radius')!)
+      const density = canvas.getAttribute('data-density')!
+      const starfield = new Stars(canvas.id, maxRadius, minRadius, density)
+      starfieldInstances.push(starfield)
+    })
+  }
+
+  initStarfield()
+</script>

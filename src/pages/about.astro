@@ -1,0 +1,31 @@
+---
+import RootLayout from '@layouts/RootLayout.astro'
+import HeroContainer from '@components/shared/HeroContainer.astro'
+import AboutHero from '@components/about/AboutHero.astro'
+import StoryWithValues from '@components/about/StoryWithValues.astro'
+import Team from '@components/about/Team.astro'
+import WorkCulture from '@components/about/WorkCulture.astro'
+import OpenPositions from '@components/about/OpenPositions.astro'
+import Footer from '@components/shared/Footer.astro'
+import Divider from '@components/shared/Divider.astro'
+import { SITE } from '@config'
+---
+
+<RootLayout
+  title={`About | ${SITE.title}`}
+  description="Explore Nebula's journey and mission to enhance remote work. Discover our culture, values, and careers."
+>
+  <HeroContainer bgGradientClassName="bottom-0 h-[calc(100%_+_320px)]">
+    <AboutHero />
+  </HeroContainer>
+  <Divider />
+  <StoryWithValues />
+  <Divider />
+  <Team />
+  <Divider />
+  <WorkCulture />
+  <Divider />
+  <OpenPositions />
+  <Divider />
+  <Footer />
+</RootLayout>

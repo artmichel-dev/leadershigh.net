@@ -1,0 +1,204 @@
+---
+import Container from '@components/shared/Container.astro'
+import { Icon } from 'astro-icon/components'
+import { Image } from 'astro:assets'
+import { twMerge } from 'tailwind-merge'
+
+import longGradient from '@images/long-gradient.png'
+import avatar from '@images/avatars/avatar-2.png'
+
+const jobListings = [
+  {
+    category: 'Engineering',
+    icon: 'nucleo/window-code-16',
+    jobs: [
+      {
+        title: 'Staff Fullstack Engineer',
+        location: 'Remote - United States',
+      },
+      {
+        title: 'Senior - Front-End Developer',
+        location: 'Remote - Europe',
+      },
+      {
+        title: 'Intern - Security Analyst',
+        location: 'Remote - North America',
+      },
+      {
+        title: 'Senior - DevOps Engineer',
+        location: 'Remote - South America',
+      },
+    ],
+  },
+  {
+    category: 'Product and Design',
+    icon: 'nucleo/magic-wand-16',
+    jobs: [
+      {
+        title: 'Executive Product Manager',
+        location: 'Remote - Anywhere on Earth',
+      },
+      {
+        title: 'Senior - UX/UI Designer',
+        location: 'Remote - North America',
+      },
+      {
+        title: 'Entry - Graphic Designer',
+        location: 'Remote - Europe',
+      },
+    ],
+  },
+  {
+    category: 'Sales and Marketing',
+    icon: 'nucleo/trend-up-16',
+    jobs: [
+      {
+        title: 'Digital Marketing Specialist',
+        location: 'Remote - South America',
+      },
+      {
+        title: 'Sales Representative',
+        location: 'Remote - United States',
+      },
+      {
+        title: 'Content Strategist',
+        location: 'Remote - Asia',
+      },
+    ],
+  },
+]
+---
+
+<section class="relative overflow-hidden py-20 sm:py-24">
+  <div class="absolute -top-96 bottom-48 left-0 right-80 -z-10">
+    <Image
+      src={longGradient}
+      alt=""
+      class="h-full w-full object-contain object-center opacity-60"
+      widths={[420, 768, 1024]}
+      sizes={`(max-width: 420px) 420px, (max-width: 768px) 768px, (min-width: 768px) 1024px`}
+    />
+  </div>
+
+  <div class="absolute -bottom-96 -right-2/3 left-0 top-1/2 -z-10">
+    <Image
+      src={longGradient}
+      alt=""
+      class="h-full w-full object-contain object-center opacity-50"
+      widths={[420, 768, 1024]}
+      sizes={`(max-width: 420px) 420px, (max-width: 768px) 768px, (min-width: 768px) 1024px`}
+    />
+  </div>
+
+  <Container class="max-w-4xl">
+    {/* Text content */}
+    <div class="relative flex flex-col">
+      <h1
+        class="text-4xl font-bold leading-extratight text-violet-100 sm:text-5xl sm:leading-extratight"
+      >
+        <span class="relative inline-block text-nowrap">
+          <span
+            class="relative z-10 bg-gradient-to-b from-violet-400 via-violet-400 to-violet-500 bg-clip-text text-transparent"
+          >
+            Craft your future
+          </span>
+          <span class="absolute -top-px left-0 -z-10 text-violet-300"
+            >Craft your future</span
+          >
+        </span>
+        with us.
+        <br class="hidden md:block" />
+        Redefine remote work.
+      </h1>
+      <p class="mt-5 max-w-xl text-lg leading-8 text-zinc-200">
+        If you're passionate about shaping the future of remote work with
+        cutting-edge solutions, Nebula is your launchpad. Let's create software
+        that orbits beyond the conventional, together
+      </p>
+    </div>
+
+    {/* Job listings */}
+    <div class="mt-16 space-y-16 sm:mt-24">
+      {
+        jobListings.map((jobsGroup) => (
+          <div class="space-y-6">
+            <div class="inline-flex w-max rounded-full bg-zinc-950/[.01] shadow-inner-blur">
+              <div class="flex h-full w-full items-center space-x-2 rounded-full border border-violet-200/[.06] px-4 py-1.5">
+                <Icon name={jobsGroup.icon} class="h-4 w-4 text-violet-200" />
+                <span class="text-sm font-medium text-violet-100 drop-shadow-[-12px_-4px_6px_rgba(237,233,254,0.2)]">
+                  {jobsGroup.category}
+                </span>
+              </div>
+            </div>
+            <ul role="list">
+              {jobsGroup.jobs.map((job, index) => (
+                <li class="relative bg-zinc-950/[.01] shadow-inner-blur first:rounded-t-2xl last:rounded-b-2xl">
+                  <div
+                    class={twMerge([
+                      'flex items-center justify-between space-x-3 border border-violet-200/[.06] border-t-transparent p-6 md:space-x-4 md:p-8',
+                      index === 0 &&
+                        'rounded-t-2xl border-b-violet-200/[.06] border-t-violet-200/[.06]',
+                      jobsGroup.jobs.length - 1 === index && 'rounded-b-2xl',
+                    ])}
+                  >
+                    <div class="flex sm:w-2/5">
+                      <p class="text-[15px] font-semibold text-violet-100 md:text-base">
+                        {job.title}
+                      </p>
+                    </div>
+                    <div class="flex items-center justify-between space-x-4 sm:w-3/5">
+                      <p class="hidden text-[15px] font-medium text-zinc-400 sm:block md:text-base">
+                        {job.location}
+                      </p>
+                      <a
+                        href="#"
+                        class="flex items-center text-sm font-semibold leading-4 text-violet-400 duration-200 ease-in-out hover:text-violet-300"
+                      >
+                        <span class="absolute inset-x-0 -top-px bottom-0 sm:hidden" />
+                        <p class="hidden items-center sm:flex">
+                          Apply
+                          <span class="ml-1 hidden md:block"> today</span>
+                        </p>
+                        <Icon
+                          name="heroicons:chevron-right-16-solid"
+                          class="ml-2 h-5 w-5 text-violet-300 duration-200 ease-in-out sm:h-4 sm:w-4"
+                        />
+                      </a>
+                    </div>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+
+    {/* Testimonial */}
+    <div
+      class="mx-auto mt-16 flex max-w-4xl flex-col items-center sm:mt-24 lg:mt-32"
+    >
+      <p
+        class="text-center text-xl font-semibold leading-8 text-violet-50 sm:text-2xl sm:leading-9"
+      >
+        “Nebula has not only given me the platform to excel in my coding skills
+        but also the flexibility to work from anywhere. I've grown more in my
+        years here than I did in my entire career previously.”
+      </p>
+      <div
+        class="mt-8 flex h-12 w-12 items-center justify-center rounded-full bg-[linear-gradient(to_top_right,rgba(113,113,122,0.3),rgba(24,24,27,1)),linear-gradient(rgba(9,9,11,0.5),rgba(9,9,11,0.5))] sm:mt-10"
+      >
+        <Image
+          class="h-[46px] w-[46px] rounded-full object-cover"
+          src={avatar}
+          alt="Nina Tucker"
+        />
+      </div>
+      <div class="mt-3.5 flex items-center space-x-2.5">
+        <span class="font-semibold text-violet-50">Nina Tucker</span>
+        <span class="h-1 w-1 rounded-full bg-violet-50"></span>
+        <span class="text-zinc-400">Software Engineer</span>
+      </div>
+    </div>
+  </Container>
+</section>

@@ -1,0 +1,158 @@
+---
+import { Image } from 'astro:assets'
+
+import fictionalLogo01 from '@images/logos/fictional-logo-01.svg'
+import fictionalLogo02 from '@images/logos/fictional-logo-02.svg'
+import fictionalLogo03 from '@images/logos/fictional-logo-03.svg'
+import avatar1 from '@images/avatars/avatar-1.png'
+import avatar2 from '@images/avatars/avatar-2.png'
+import avatar3 from '@images/avatars/avatar-3.png'
+
+const testimonials = [
+  {
+    company: 'Fictional logo 1',
+    logo: fictionalLogo01,
+    avatar: avatar1,
+    name: 'Ethan Long',
+    title: 'Lead Marketer, Layers',
+    quote:
+      'So happy our team moved to Nebula! It Simplified our hiring process, making collaboration a breeze.',
+  },
+  {
+    company: 'Fictional logo 02',
+    logo: fictionalLogo02,
+    avatar: avatar2,
+    name: 'Amélie Laurent',
+    title: 'Product Manager, Sisyphus',
+    quote:
+      'We’ve been using Nebula to kick start every new project and can’t imagine working without it.',
+  },
+  {
+    company: 'Fictional logo 03',
+    logo: fictionalLogo03,
+    avatar: avatar3,
+    name: 'Olivia Simmons',
+    title: 'CTO, Capsule',
+    quote:
+      'Nebula’s collaboration software streamlined our dev process with seamless integrations.',
+  },
+]
+---
+
+<div class="splide mt-16 flex flex-col justify-center lg:mt-0">
+  <div class="splide__track">
+    <ul class="splide__list">
+      {
+        testimonials.map((testimonial) => (
+          <li class="splide__slide">
+            <div class="relative z-10 flex flex-col items-center">
+              <Image
+                src={testimonial.logo}
+                alt={testimonial.company}
+                class="h-10 w-auto"
+              />
+              <p class="mt-7 max-w-sm text-center text-lg font-medium leading-8 text-violet-50 sm:mt-8 sm:text-xl">
+                "{testimonial.quote}"
+              </p>
+              <div class="mt-8 flex flex-col items-center">
+                <div class="flex h-16 w-16 items-center justify-center rounded-full bg-[linear-gradient(to_top_right,rgba(113,113,122,0.3),rgba(24,24,27,1)),linear-gradient(rgba(9,9,11,0.5),rgba(9,9,11,0.5))]">
+                  <Image
+                    class="h-[62px] w-[62px] rounded-full object-cover"
+                    src={testimonial.avatar}
+                    alt={testimonial.name}
+                  />
+                </div>
+                <p class="mt-4 font-semibold text-violet-50 sm:text-lg">
+                  {testimonial.name}
+                </p>
+                <p class="mt-1 text-sm text-violet-100/80 sm:text-base">
+                  {testimonial.title}
+                </p>
+              </div>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+
+  <div
+    class="mt-10 flex w-full items-center justify-center space-x-3.5 data-[active=false]:*:bg-violet-300/40 data-[active=true]:*:bg-violet-100 data-[active=false]:hover:*:bg-violet-200/40"
+  >
+    {
+      testimonials.map((_) => (
+        <button
+          data-pagination
+          data-active="false"
+          class="h-2 w-2 rounded-full duration-200 ease-in-out"
+        />
+      ))
+    }
+  </div>
+
+  <p
+    class="mx-auto mt-12 max-w-sm text-center text-base font-medium leading-7 text-violet-50/95 sm:mt-14 sm:text-[17px] xl:max-w-md"
+  >
+    <span
+      class="bg-gradient-to-r from-purple-300 to-violet-400 bg-clip-text font-semibold text-transparent"
+      >10,000+</span
+    > remote workers are using Nebula to streamline their projects and enhance collaboration.
+  </p>
+</div>
+
+<script>
+  import Splide from '@splidejs/splide'
+  import '@splidejs/splide/css'
+
+  let splideInstance: Splide | null = null
+  let clickListeners: EventListener[] = []
+
+  function initializeSplide() {
+    const customPaginationDots = document.querySelectorAll<HTMLButtonElement>(
+      'button[data-pagination]'
+    )
+
+    // Destroy existing Splide instance if present
+    if (splideInstance) {
+      splideInstance.destroy(true)
+      splideInstance = null
+      // Remove previous event listeners
+      customPaginationDots.forEach((dot, index) => {
+        dot.removeEventListener('click', clickListeners[index])
+      })
+    }
+
+    if (customPaginationDots.length === 0) {
+      return
+    }
+
+    splideInstance = new Splide('.splide', {
+      type: 'loop',
+      speed: 700,
+      perPage: 1,
+      perMove: 1,
+      arrows: false,
+      pagination: false,
+      autoplay: true,
+      interval: 10000,
+    }).mount()
+
+    clickListeners = Array.from(customPaginationDots).map((dot, index) => {
+      const clickHandler = () => {
+        splideInstance?.go(index)
+      }
+      dot.addEventListener('click', clickHandler)
+      return clickHandler
+    })
+
+    splideInstance.on('move', (newIndex) => {
+      customPaginationDots.forEach((dot) => (dot.dataset.active = 'false'))
+      customPaginationDots[newIndex].dataset.active = 'true'
+    })
+
+    // Set the initial active dot
+    customPaginationDots[0].dataset.active = 'true'
+  }
+
+  initializeSplide()
+</script>

@@ -1,0 +1,74 @@
+---
+import { twMerge } from 'tailwind-merge'
+import type { HTMLAttributes } from 'astro/types'
+
+interface CustomProps {
+  variant?: 'primary' | 'secondary' | 'tertiary'
+  href?: string
+  size?: 'lg' | 'md' | 'sm'
+  innerClass?: string
+}
+
+type Props = CustomProps & HTMLAttributes<'a'> & HTMLAttributes<'button'>
+
+const {
+  variant = 'primary',
+  size = 'lg',
+  innerClass = '',
+  href,
+  class: className,
+  ...attrs
+} = Astro.props
+
+const sizeStyles = {
+  smClassName: 'px-3.5 py-1.5 text-sm',
+  mdClassName: 'px-4 py-2 text-sm',
+  lgClassName: 'px-3.5 py-2 sm:px-4 sm:py-2.5 text-sm sm:text-[15px]',
+}
+
+const variantStyles = {
+  primaryClassName:
+    "relative shadow-btn-primary text-violet-50 bg-btn-primary after:content-[''] after:absolute after:inset-0 after:w-full after:h-full after:bg-btn-primary-hover after:opacity-0 after:transition-all after:duration-200 hover:after:opacity-100 after:shadow-btn-primary-hover after:rounded-lg",
+  secondaryClassName:
+    "relative shadow-btn-secondary bg-zinc-950/[.01] text-violet-50 duration-200 ease-in-out hover:bg-violet-900/[0.03] hover:text-white after:content-[''] after:absolute after:inset-0 after:w-full after:h-full after:opacity-0 after:transition-all after:duration-200 hover:after:opacity-100 after:shadow-btn-secondary-hover after:rounded-lg",
+  tertiaryClassName: 'text-violet-50 hover:text-white',
+}
+
+const defaultClassName = `inline-flex items-center font-semibold antialiased leading-none group rounded-lg outline-none`
+const innerClassName =
+  'relative z-10 flex w-full items-center justify-center space-x-2 text-nowrap'
+---
+
+{/* Render link if href exists otherwise render button */}
+{
+  href ? (
+    <a
+      href={href}
+      class={twMerge(
+        defaultClassName,
+        variantStyles[`${variant}ClassName`],
+        sizeStyles[`${size}ClassName`],
+        className
+      )}
+      {...attrs}
+    >
+      <div class={twMerge(innerClassName, innerClass)}>
+        <slot />
+      </div>
+    </a>
+  ) : (
+    <button
+      class={twMerge(
+        defaultClassName,
+        variantStyles[`${variant}ClassName`],
+        sizeStyles[`${size}ClassName`],
+        className
+      )}
+      {...attrs}
+    >
+      <div class={twMerge(innerClassName, innerClass)}>
+        <slot />
+      </div>
+    </button>
+  )
+}

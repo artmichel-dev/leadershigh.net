@@ -1,0 +1,28 @@
+---
+import RootLayout from '@layouts/RootLayout.astro'
+import HeroContainer from '@components/shared/HeroContainer.astro'
+import ContactHero from '@components/contact/ContactHero.astro'
+import PopularLinks from '@components/contact/PopularLinks.astro'
+import Faq from '@components/shared/Faq.astro'
+import Footer from '@components/shared/Footer.astro'
+import Divider from '@components/shared/Divider.astro'
+import { SITE } from '@config'
+---
+
+<RootLayout
+  title={`Contact | ${SITE.title}`}
+  description="Need assistance or have questions? Contact Nebula's team for prompt support and information."
+>
+  <HeroContainer
+    class="overflow-visible overflow-x-clip"
+    bgGradientClassName="inset-x-0 bottom-0 -top-32 opacity-80 sm:opacity-100"
+  >
+    <ContactHero />
+  </HeroContainer>
+  <Divider />
+  <PopularLinks />
+  <Divider />
+  <Faq />
+  <Divider />
+  <Footer />
+</RootLayout>

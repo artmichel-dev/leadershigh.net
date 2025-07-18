@@ -1,0 +1,43 @@
+---
+import { Image } from 'astro:assets'
+import NavbarPill from '@components/header/NavbarPill.astro'
+import Container from '@components/shared/Container.astro'
+import Button from '@components/shared/Button.astro'
+import logo from '@images/logo.png'
+---
+
+<header class="relative h-20">
+  <Container class="flex h-full items-center">
+    <nav class="relative z-50 flex w-full items-center justify-between">
+      {/* Logo */}
+      <div class="relative z-10 hidden shrink-0 items-center md:flex">
+        <a href="/" aria-label="Home" class="flex flex-shrink-0 items-center">
+          <Image src={logo} alt="" class="h-7 w-auto lg:h-8" />
+        </a>
+      </div>
+
+      <NavbarPill />
+
+      <div class="hidden items-center md:flex lg:space-x-3 xl:space-x-4">
+        <Button
+          href="/signin"
+          variant="tertiary"
+          size="sm"
+          class="overflow-hidden"
+        >
+          Sign in
+        </Button>
+
+        {/* Call to action */}
+        <Button href="/signup" size="sm">Sign up</Button>
+      </div>
+    </nav>
+    <hr
+      class="absolute inset-x-0 bottom-0 h-px border-0 bg-gradient-to-r from-transparent via-violet-200/15 to-transparent"
+    />
+  </Container>
+</header>
+
+<script
+  src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"
+></script>

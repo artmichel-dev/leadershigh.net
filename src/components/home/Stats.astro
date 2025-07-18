@@ -1,0 +1,121 @@
+---
+import '@styles/vendors/odometer-theme-default.css'
+---
+
+<dl
+  id="stats"
+  class="mt-16 grid gap-14 sm:mt-20 sm:grid-cols-3 sm:gap-3 lg:mt-24 xl:mt-28"
+>
+  <div class="flex flex-col items-center justify-center">
+    <dt
+      class="text-center text-xs font-extrabold uppercase tracking-widest text-violet-50/80"
+    >
+      Active users
+    </dt>
+    <dd
+      id="active-users"
+      class="odometer mt-4 !font-mono text-3xl font-bold text-white"
+      data-val="1415500"
+    >
+      1415500
+    </dd>
+  </div>
+
+  <div class="flex flex-col items-center justify-center">
+    <dt
+      class="text-center text-xs font-extrabold uppercase tracking-widest text-violet-50/80"
+    >
+      Companies managed
+    </dt>
+    <dd
+      id="companies-managed"
+      class="odometer mt-4 text-center !font-mono text-3xl font-bold text-white"
+      data-val="10310"
+    >
+      10310
+    </dd>
+  </div>
+
+  <div class="flex flex-col items-center justify-center">
+    <dt
+      class="text-center text-xs font-extrabold uppercase tracking-widest text-violet-50/80"
+    >
+      Projects created
+    </dt>
+    <dd
+      id="projects-created"
+      class="odometer mt-4 text-center !font-mono text-3xl font-bold text-white"
+      data-val="69420"
+    >
+      69420
+    </dd>
+  </div>
+</dl>
+
+<script>
+  const statsSection = document.getElementById('stats')!
+  const activeUsersOdometer = document.getElementById('active-users')!
+  const companiesManagedOdometer = document.getElementById('companies-managed')!
+  const projectsCreatedOdometer = document.getElementById('projects-created')!
+
+  interface StatsData {
+    activeUsers: number
+    companiesManaged: number
+    projectsCreated: number
+  }
+
+  function fetchMockStats(): Promise<StatsData> {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        const currentStats = {
+          activeUsers: parseInt(activeUsersOdometer.dataset.val ?? '0'),
+          companiesManaged: parseInt(
+            companiesManagedOdometer.dataset.val ?? '0'
+          ),
+          projectsCreated: parseInt(projectsCreatedOdometer.dataset.val ?? '0'),
+        }
+
+        resolve({
+          activeUsers:
+            currentStats.activeUsers + Math.floor(Math.random() * 200),
+          companiesManaged:
+            currentStats.companiesManaged + Math.floor(Math.random() * 5),
+          projectsCreated:
+            currentStats.projectsCreated + Math.floor(Math.random() * 15),
+        })
+      }, 500)
+    })
+  }
+
+  function updateStats() {
+    fetchMockStats().then((data) => {
+      activeUsersOdometer.dataset.val = data.activeUsers.toString()
+      companiesManagedOdometer.dataset.val = data.companiesManaged.toString()
+      projectsCreatedOdometer.dataset.val = data.projectsCreated.toString()
+      activeUsersOdometer.innerHTML = data.activeUsers.toString()
+      companiesManagedOdometer.innerHTML = data.companiesManaged.toString()
+      projectsCreatedOdometer.innerHTML = data.projectsCreated.toString()
+    })
+  }
+
+  const observer = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          updateStats() // Handle initial and subsequent updates
+          setInterval(updateStats, 7000) // Update every 7 seconds
+
+          observer.unobserve(entry.target)
+        }
+      })
+    },
+    {
+      root: null,
+      threshold: 0.5,
+    }
+  )
+
+  observer.observe(statsSection)
+</script>
+
+<script src="../../scripts/vendors/odometer.min.js"></script>

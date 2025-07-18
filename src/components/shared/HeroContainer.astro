@@ -1,0 +1,53 @@
+---
+import Header from '@components/header/Header.astro'
+import StarField from '@components/shared/StarField.astro'
+import { Image } from 'astro:assets'
+import spaceWavesPng from '@images/hero-space-waves.png'
+import { twMerge } from 'tailwind-merge'
+import type { HTMLAttributes } from 'astro/types'
+
+interface CustomProps {
+  starField?: boolean
+  header?: boolean
+  bgGradientClassName?: string
+  innerContainerClassName?: string
+}
+
+type Props = CustomProps & HTMLAttributes<'section'>
+
+const {
+  starField = true,
+  header = true,
+  bgGradientClassName = '',
+  innerContainerClassName = '',
+  class: className,
+  ...attrs
+} = Astro.props
+---
+
+<section class={twMerge('relative', className)} {...attrs}>
+  {header && <Header />}
+
+  <div class={twMerge('overflow-hidden', innerContainerClassName)}>
+    <Image
+      src={spaceWavesPng}
+      alt=""
+      widths={[420, 768, 1024, 1280, 1536, 1920, spaceWavesPng.width]}
+      sizes={`(max-width: 420px) 100vw, (max-width: 768px) 100vw, (max-width: 1024px) 100vw, (max-width: 1280px) 100vw, (max-width: 1536px) 100vw, (max-width: 1920px) 100vw, (min-width: 1920px) ${spaceWavesPng.width}px`}
+      class={twMerge(
+        'absolute inset-x-0 -top-80 -z-20 h-full w-full object-cover',
+        bgGradientClassName
+      )}
+    />
+
+    {
+      starField && (
+        <div class="absolute inset-0 -z-10" aria-hidden="true">
+          <StarField />
+        </div>
+      )
+    }
+
+    <slot />
+  </div>
+</section>

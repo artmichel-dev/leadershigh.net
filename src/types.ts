@@ -1,11 +1,18 @@
-import { FC, SVGProps } from 'react'
+import type { ImageMetadata } from 'astro'
+
+export type Site = {
+  website: string
+  author: string
+  description: string
+  title: string
+  ogImage: string
+}
 
 export type SocialObjects = {
   name: SocialMedia
   href: string
   label: string
   ariaLabel: string
-  icon: FC<SVGProps<SVGSVGElement>>
 }[]
 
 export type SocialMedia =
@@ -34,5 +41,5 @@ export type SocialMedia =
 
 export type Clients = {
   name: string
-  logo: FC<SVGProps<SVGSVGElement>>
+  logo: ImageMetadata
 }[]

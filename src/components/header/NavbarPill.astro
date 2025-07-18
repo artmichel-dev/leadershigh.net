@@ -1,0 +1,287 @@
+---
+import MobileMenu from '@components/header/MobileMenu.astro'
+import Hamburger from '@components/header/Hamburger.astro'
+import Button from '@components/shared/Button.astro'
+import { Image } from 'astro:assets'
+import { Icon } from 'astro-icon/components'
+
+import logo from '@images/logo.png'
+import logoIcon from '@images/logo-icon.png'
+
+const pages = [
+  { label: 'Home', href: '/', icon: 'heroicons:home-16-solid' },
+  { label: 'About', href: '/about', icon: 'heroicons:users-16-solid' },
+  {
+    label: 'Pricing',
+    href: '/pricing',
+    icon: 'heroicons:credit-card-16-solid',
+  },
+  {
+    label: 'Contact',
+    href: '/contact',
+    icon: 'heroicons:envelope-open-16-solid',
+  },
+  {
+    label: 'Sign in',
+    href: '/signin',
+    icon: 'heroicons:user-circle-16-solid',
+  },
+  { label: 'Sign up', href: '/signup', icon: 'heroicons:user-plus-16-solid' },
+  {
+    label: 'Password reset',
+    href: 'password-reset',
+    icon: 'heroicons:lock-open-16-solid',
+  },
+  { label: '404', href: '/404', icon: 'heroicons:exclamation-circle-16-solid' },
+]
+
+const links = [
+  { label: 'Home', href: '/' },
+  { label: 'About', href: '/about' },
+  { label: 'Pricing', href: '/pricing' },
+  { label: 'Contact', href: '/contact' },
+]
+
+const pathname = Astro.url.pathname.replace(/(?<=.)\/$/, '')
+---
+
+<div
+  class="fixed left-0 flex w-full justify-center px-5 sm:px-6 md:px-0"
+  x-data=`{ 
+    showButton: false, 
+    mainCtaOffset: 0, 
+    pillWidth: 0, 
+    pillExpandedWidth: 0, 
+    windowWidth: window.innerWidth, 
+    mobileMenuOpen: false, 
+    pagesDropdownOpen: false,
+    updateDropdownPosition() {
+      const rect = this.$refs.pagesDropdownButton.getBoundingClientRect();
+      this.$refs.pagesDropdown.style.top = rect.top + this.$refs.pillNav.offsetHeight + 8 + 'px';
+      this.$refs.pagesDropdown.style.left = rect.left + parseInt(window.getComputedStyle(this.$refs.pagesDropdownButton).paddingLeft) + 'px';
+    },
+    toggleDropdown() {
+      if (this.pagesDropdownOpen) {
+        return this.closeDropdown()
+      }
+
+      this.$refs.pagesDropdownButton.focus()
+      this.pagesDropdownOpen = true
+      this.updateDropdownPosition();
+    },
+    closeDropdown(focusAfter) {
+      if (! this.pagesDropdownOpen) return
+      this.pagesDropdownOpen = false
+      focusAfter && focusAfter.focus()
+    },
+    getOffsetTop(element) {
+      let offsetTop = 0;
+      while (element) {
+        offsetTop += element.offsetTop;
+        element = element.offsetParent;
+      }
+      return offsetTop;
+    },
+    initNavbar() {
+      const topCta = document.getElementById('top-cta');
+      if (topCta) {
+        this.mainCtaOffset = this.getOffsetTop(topCta) + topCta.offsetHeight;
+      }
+      this.pillWidth = $refs.pillNav.offsetWidth;
+      $refs.navCta.classList.remove('hidden');
+
+      // Calculate the width of the button including its margin
+      const navCtaStyle = window.getComputedStyle($refs.navCta);
+      const navCtaWidth = $refs.navCta.offsetWidth;
+      const navCtaMargin = parseInt(navCtaStyle.marginLeft) + parseInt(navCtaStyle.marginRight);
+
+      this.pillExpandedWidth = navCtaWidth + navCtaMargin + this.pillWidth;
+
+      // Recalculate pillExpandedWidth if window resizes
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) {
+          $refs.pillNav.style.width = "fit-content"
+          setTimeout(() => {
+            this.windowWidth = window.innerWidth;
+            if (topCta) {
+              this.mainCtaOffset = this.getOffsetTop(topCta) + topCta.offsetHeight;
+            }
+            if (this.showButton && this.windowWidth > 768) {
+              this.pillExpandedWidth = $refs.pillNav.firstElementChild.offsetWidth;
+              this.pillWidth = this.pillExpandedWidth - navCtaWidth - navCtaMargin;
+            } else {
+              this.pillWidth = $refs.pillNav.firstElementChild.offsetWidth;
+              this.pillExpandedWidth = navCtaWidth + navCtaMargin + this.pillWidth;
+            }
+
+            $refs.pillNav.style.width = this.showButton && this.windowWidth > 768 ? this.pillExpandedWidth + 'px' : this.pillWidth + 'px';
+          }, 250)
+
+          // update dropdown position
+          if (this.pagesDropdownOpen) {
+            this.updateDropdownPosition();
+          }
+        } else {
+          // unset width if window is resized to mobile
+          $refs.pillNav.style.width = "100%";
+        }
+      });
+      
+      window.addEventListener('scroll', () => {
+        $refs.pillNav.classList.add('overflow-hidden')
+        this.showButton = window.scrollY > this.mainCtaOffset;
+      });
+
+      this.$watch('showButton', (_) => {
+        if (this.pagesDropdownOpen) {
+          setTimeout(() => {
+            this.updateDropdownPosition();
+          }, 500)
+        }
+      });
+    }
+  }`
+  x-init="initNavbar"
+  x-on:keydown.escape.prevent.stop="closeDropdown($refs.pagesDropdownButton)"
+>
+  <div
+    id="pill-nav"
+    class="relative z-50 flex max-w-lg items-center overflow-hidden rounded-full bg-zinc-900/15 shadow-inner-blur backdrop-blur-lg backdrop-brightness-[85%] transition-[width] duration-500 ease-in-out md:max-w-none"
+    x-ref="pillNav"
+    :style="`width: ${windowWidth > 768 ? (showButton ? pillExpandedWidth + 'px' : pillWidth + 'px') : '100%'}`"
+  >
+    <div
+      class="flex h-full w-full items-center justify-between rounded-full border border-violet-200/[.06] pl-[18px] pr-5 text-violet-50 md:w-fit md:justify-normal md:px-1.5"
+    >
+      {/* Logo mobile */}
+      <div class="flex shrink-0 items-center md:hidden">
+        <a
+          href="/"
+          aria-label="Home"
+          class="flex flex-shrink-0 items-center py-2"
+        >
+          <Image
+            src={logo}
+            alt="Nebula Logo"
+            class="hidden h-[26px] w-auto min-[402px]:block"
+          />
+          <Image
+            src={logoIcon}
+            alt="Nebula Logo Icon"
+            class="h-[26px] w-auto min-[402px]:hidden"
+          />
+        </a>
+      </div>
+
+      {
+        links.map((link) => (
+          <a
+            href={link.href}
+            class:list={[
+              'relative hidden h-full items-center px-3 py-2.5 text-sm duration-200 ease-in-out md:inline-flex lg:px-4',
+              pathname === link.href
+                ? 'font-semibold text-violet-400 drop-shadow-[-4px_-4px_6px_rgba(196,181,253,0.2)]'
+                : 'font-medium text-violet-50 drop-shadow-[-4px_-4px_6px_rgba(237,233,254,0.2)] hover:text-violet-400/95',
+            ]}
+          >
+            {link.label}
+            {pathname == link.href && (
+              <span class="absolute -bottom-px left-2 right-2 h-px bg-gradient-to-r from-violet-400/0 via-violet-400/80 to-violet-400/0" />
+            )}
+          </a>
+        ))
+      }
+
+      {/* Pages dropdown button */}
+      <button
+        type="button"
+        class="group relative hidden h-full items-center px-3 py-2.5 text-sm font-medium outline-none duration-200 ease-in-out md:inline-flex lg:px-4"
+        :class="pagesDropdownOpen ? 'text-violet-400 drop-shadow-[-4px_-4px_6px_rgba(196,181,253,0.2)]' : 'text-violet-50 drop-shadow-[-4px_-4px_6px_rgba(237,233,254,0.2)] hover:text-violet-400/95'"
+        @click="toggleDropdown()"
+        :aria-expanded="pagesDropdownOpen"
+        x-ref="pagesDropdownButton"
+      >
+        <span>Pages</span>
+
+        <Icon
+          name="heroicons:chevron-down-16-solid"
+          class="ml-1 h-4.5 w-4.5 duration-300"
+          :class="pagesDropdownOpen ? 'rotate-180 text-violet-400/90' : 'text-violet-50/90 group-hover:text-violet-400/80'"
+        />
+      </button>
+
+      <div class="flex items-center md:hidden">
+        <Button
+          href="/signin"
+          variant="tertiary"
+          size="sm"
+          class="overflow-hidden"
+        >
+          Sign in
+        </Button>
+
+        <Button
+          class="-mr-px rounded-full after:rounded-full"
+          href="/signup"
+          size="sm">Get started</Button
+        >
+
+        <Hamburger />
+      </div>
+
+      <Button
+        id="nav-cta"
+        class="-mr-px ml-3 hidden rounded-full after:rounded-full"
+        href="/signup"
+        size="sm"
+        x-ref="navCta"
+        x-show="showButton"
+        :class="windowWidth < 768 ? '!hidden' : ''"
+        x-transition:enter="transition-all ease-out duration-500"
+        x-transition:enter-start="transform opacity-0 translate-x-full"
+        x-transition:enter-end="transform opacity-100 translate-x-0"
+        x-transition:leave="transition-all ease-in duration-500"
+        x-transition:leave-start="transform opacity-100 translate-x-0"
+        x-transition:leave-end="transform opacity-0 translate-x-full"
+        >Get started</Button
+      >
+    </div>
+  </div>
+
+  {/* Pages dropdown */}
+  <div
+    style="display: none"
+    class="fixed z-20 hidden w-48 space-y-0.5 rounded-lg bg-[#1F1F24]/70 py-2.5 shadow-inner-blur outline-none backdrop-blur-lg backdrop-brightness-[85%] ease-in-out after:absolute after:inset-0 after:rounded-lg after:border after:border-violet-200/[.06] focus:outline-none md:block"
+    x-show="pagesDropdownOpen"
+    x-transition:enter="transition duration-300 ease-out"
+    x-transition:enter-start="opacity-0 -translate-y-2"
+    x-transition:enter-end="opacity-100 translate-y-0"
+    x-transition:leave="duration-200 transition ease-in"
+    x-transition:leave-start="opacity-100 translate-y-0"
+    x-transition:leave-end="opacity-0 -translate-y-2"
+    @click.away="pagesDropdownOpen = false"
+    x-ref="pagesDropdown"
+  >
+    {
+      pages.map((link) => (
+        <a
+          href={link.href}
+          class="group relative z-10 block text-nowrap px-4 py-2 text-sm font-medium text-violet-50 drop-shadow-[-4px_-4px_6px_rgba(237,233,254,0.2)] duration-200 ease-in-out hover:text-violet-400/95 hover:shadow-inner-blur-light hover:drop-shadow-[-4px_-4px_6px_rgba(196,181,253,0.2)]"
+        >
+          <span class="flex items-center">
+            {link.icon && (
+              <Icon
+                name={link.icon}
+                class="mr-2 h-4 w-4 text-violet-200/60 group-hover:text-violet-300/80"
+              />
+            )}
+            {link.label}
+          </span>
+          <span class="absolute inset-y-0 left-0 w-px bg-gradient-to-b from-violet-400/0 via-violet-400/90 to-violet-400/0 opacity-0 duration-200 ease-in-out group-hover:opacity-100" />
+        </a>
+      ))
+    }
+  </div>
+
+  <MobileMenu pages={pages} links={links} />
+</div>

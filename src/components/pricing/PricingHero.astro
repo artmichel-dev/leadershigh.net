@@ -1,0 +1,239 @@
+---
+import Container from '@components/shared/Container.astro'
+import StarField from '@components/shared/StarField.astro'
+import InvestorTestimonials from './InvestorTestimonials.astro'
+import PricingCard from './PricingCard.astro'
+import { Icon } from 'astro-icon/components'
+import { Image } from 'astro:assets'
+import cosmicButterfly from '@images/cosmic-butterfly.png'
+
+const pricingPlans = [
+  {
+    title: 'Starter',
+    price: {
+      monthly: '$9',
+      annually: '$7',
+    },
+    description:
+      'Ideal for individual professionals and small teams just beginning their journey looking for a streamlined solution.',
+    features: [
+      {
+        label: '1 GB storage per user',
+        description:
+          'Seasonal latte black java dark blue fair grounds barista black origin caffeine.',
+      },
+      {
+        label: 'Basic support',
+        description:
+          'Seasonal latte black java dark blue fair grounds barista black origin caffeine.',
+      },
+      {
+        label: 'Access to community forums',
+        description:
+          'Seasonal latte black java dark blue fair grounds barista black origin caffeine.',
+      },
+    ],
+    popular: false,
+  },
+  {
+    title: 'Pro',
+    price: {
+      monthly: '$29',
+      annually: '$24',
+    },
+    description:
+      'Designed for growing teams and businesses seeking to enhance their productivity.',
+    features: [
+      {
+        label: '5 GB storage per user',
+        description:
+          'Seasonal latte black java dark blue fair grounds barista black origin caffeine.',
+      },
+      {
+        label: 'Priority support',
+        description:
+          'Seasonal latte black java dark blue fair grounds barista black origin caffeine.',
+      },
+      {
+        label: 'Private community forums',
+        description:
+          'Seasonal latte black java dark blue fair grounds barista black origin caffeine.',
+      },
+    ],
+    popular: true,
+  },
+  {
+    title: 'Enterprise',
+    price: {
+      monthly: '$69',
+      annually: '$59',
+    },
+    description:
+      'Tailored for large organizations requiring a comprehensive solution that evolves with your enterprise.',
+    features: [
+      {
+        label: 'Unlimited storage',
+        description:
+          'Seasonal latte black java dark blue fair grounds barista black origin caffeine.',
+      },
+      {
+        label: '24/7 dedicated support',
+        description:
+          'Seasonal latte black java dark blue fair grounds barista black origin caffeine.',
+      },
+      {
+        label: 'Exclusive enterprise forums',
+        description:
+          'Seasonal latte black java dark blue fair grounds barista black origin caffeine.',
+      },
+    ],
+    popular: false,
+  },
+]
+---
+
+<div class="pb-12 pt-20 md:pb-20 lg:py-28">
+  <div class="relative">
+    {/* Stars */}
+    <div class="absolute inset-0 -z-10" aria-hidden="true">
+      <StarField />
+    </div>
+
+    <Container
+      class="max-w-4xl gap-16 lg:max-w-screen-xl"
+      x-data="{ billingType: 'monthly' }"
+    >
+      {/* Text content */}
+      <div class="relative z-10 flex flex-col items-center">
+        <div
+          class="flex items-center rounded-full bg-zinc-950/[.01] shadow-inner-blur"
+        >
+          <div
+            class="flex h-full w-full items-center space-x-2 rounded-full border border-violet-200/[.06] px-4 py-1.5"
+          >
+            <Icon
+              name="nucleo/tags-stack-16"
+              class="h-3.5 w-3.5 text-violet-200"
+            />
+            <span
+              class="text-sm font-medium text-violet-100 drop-shadow-[-12px_-4px_6px_rgba(237,233,254,0.2)]"
+            >
+              Nebula’s pricing
+            </span>
+          </div>
+        </div>
+        <h1
+          class="mt-5 max-w-4xl text-center text-[2.75rem] font-bold leading-[1.125] text-violet-100 sm:text-5xl sm:leading-[1.125] md:text-6xl md:leading-[1.125] lg:text-[64px]"
+        >
+          Flexible plans tailored to your needs
+        </h1>
+        <p
+          class="mt-5 max-w-xl text-center text-[17px] leading-8 text-zinc-200 sm:text-lg sm:leading-8"
+        >
+          Discover the perfect plan that aligns with your ambitions and scale,
+          and experience the freedom to grow on your terms.
+        </p>
+      </div>
+
+      {/* Pricing cards */}
+      <div
+        class="mx-auto mt-12 flex max-w-lg flex-col items-center sm:mt-16 sm:max-w-xl lg:mx-0 lg:mt-20 lg:max-w-none"
+      >
+        {/* Monthly/Annual toggle */}
+        <div
+          class="flex items-center rounded-full bg-zinc-950/[.01] shadow-inner-blur"
+        >
+          <div
+            class="flex h-full w-full items-center space-x-2 rounded-full border border-violet-200/[.06] px-1 py-1"
+          >
+            <button
+              @click="billingType = 'monthly'"
+              class="group relative inline-flex items-center overflow-hidden rounded-full px-4 py-2 text-sm font-semibold leading-4 antialiased"
+              :class="billingType === 'monthly' ? 'bg-btn-primary text-violet-50 shadow-btn-primary' : 'text-violet-50 hover:text-white'"
+              >Monthly</button
+            >
+            <button
+              @click="billingType = 'annual'"
+              class="group relative inline-flex items-center overflow-hidden rounded-full px-4 py-2 text-sm font-semibold leading-4 antialiased"
+              :class="billingType === 'annual' ? 'bg-btn-primary text-violet-50 shadow-btn-primary' : 'text-violet-50 hover:text-white'"
+              >Annually</button
+            >
+          </div>
+        </div>
+
+        {/* Plans */}
+        <div class="relative">
+          <div class="absolute -bottom-64 -left-96 -right-96 top-0 -z-10">
+            <Image
+              src={cosmicButterfly}
+              alt=""
+              class="h-full w-full object-fill opacity-10"
+              widths={[420, 768, 1024]}
+              sizes={`(max-width: 420px) 420px, (max-width: 768px) 768px, (max-width: 1024px) 1024px, (min-width: 1024px) 1024px`}
+            />
+          </div>
+          <div
+            class="mt-10 w-full space-y-10 lg:grid lg:grid-cols-3 lg:gap-5 lg:space-y-0 xl:gap-12"
+          >
+            {
+              pricingPlans.map((plan) => (
+                <div class="flex flex-1 flex-col space-y-8 lg:space-y-0">
+                  {/* Pricing card */}
+                  <PricingCard plan={plan} />
+                  <div class="space-y-8 lg:hidden">
+                    {plan.features.map((feature) => (
+                      <div class="flex items-start space-x-3">
+                        <Icon
+                          name="nucleo/o-check-16"
+                          class:list={[
+                            'mt-1.5 h-4 w-4 shrink-0',
+                            plan.popular ? 'text-violet-400' : 'text-white',
+                          ]}
+                        />
+                        <p class="text-[17px] leading-7 text-zinc-300">
+                          <span class="mr-0.5 font-semibold text-white">
+                            {feature.label}.
+                          </span>
+                          {feature.description}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+          <div
+            class="hidden lg:mt-16 lg:grid lg:grid-cols-3 lg:gap-5 xl:gap-12"
+          >
+            {
+              pricingPlans.map((plan) => (
+                <div class="space-y-8">
+                  {plan.features.map((feature) => (
+                    <div class="flex items-start space-x-3">
+                      <Icon
+                        name="nucleo/o-check-16"
+                        class:list={[
+                          'mt-1.5 h-4 w-4 shrink-0',
+                          plan.popular ? 'text-violet-400' : 'text-white',
+                        ]}
+                      />
+                      <p class="text-[17px] leading-7 text-zinc-300">
+                        <span class="mr-0.5 font-semibold text-white">
+                          {feature.label}.
+                        </span>
+                        {feature.description}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </Container>
+  </div>
+
+  <InvestorTestimonials />
+</div>

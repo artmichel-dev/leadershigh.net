@@ -1,0 +1,68 @@
+---
+import RootLayout from '@layouts/RootLayout.astro'
+import HeroContainer from '@components/shared/HeroContainer.astro'
+import Container from '@components/shared/Container.astro'
+import Button from '@components/shared/Button.astro'
+import Footer from '@components/shared/Footer.astro'
+import { Icon } from 'astro-icon/components'
+import { Image } from 'astro:assets'
+import spaceSpotlight from '@images/space-spotlight.png'
+---
+
+<RootLayout>
+  <HeroContainer bgGradientClassName="-top-56">
+    {/* Hero content */}
+    <Container class="relative gap-16 py-20 lg:pt-28">
+      <Image
+        src={spaceSpotlight}
+        alt=""
+        class="absolute -bottom-3/4 left-1/2 h-auto max-w-3xl -translate-x-1/2 object-contain opacity-90 sm:max-w-4xl md:-bottom-full lg:-bottom-[135%] lg:max-w-7xl"
+        widths={[420, 768, 1024, 1280]}
+        sizes={`(max-width: 420px) 420px, (max-width: 768px) 768px, (max-width: 1024px) 1024px, (min-width: 1024px) 1280px`}
+      />
+      {/* Text content */}
+      <div class="relative z-10 flex flex-col items-center">
+        <div
+          class="flex items-center rounded-full bg-zinc-950/[.01] shadow-inner-blur"
+        >
+          <div
+            class="flex h-full w-full items-center space-x-2 rounded-full border border-violet-200/[.06] px-4 py-1.5"
+          >
+            <Icon name="nucleo/ufo-18" class="h-4 w-4 text-violet-200" />
+            <span
+              class="text-sm font-medium text-violet-100 drop-shadow-[-12px_-4px_6px_rgba(237,233,254,0.2)]"
+            >
+              Page not found
+            </span>
+          </div>
+        </div>
+        <h1
+          class="mt-5 max-w-5xl text-center text-8xl font-bold tracking-wide text-violet-100 md:text-9xl"
+        >
+          4<span class="relative inline-block text-nowrap">
+            <span
+              class="relative z-10 bg-gradient-to-b from-violet-400 via-violet-400 to-violet-500 bg-clip-text text-transparent"
+              >0
+            </span>
+            <span class="absolute -top-0.5 left-0 -z-10 text-violet-300">0</span
+            >
+          </span>4
+        </h1>
+        <p class="mt-5 max-w-xl text-center text-lg leading-8 text-zinc-200">
+          Looks like the page you are looking for does not exist or has been
+          removed. Please check the URL and try again.
+        </p>
+        <div
+          class="mt-8 flex items-center justify-center space-x-3 sm:space-x-5"
+        >
+          <Button href="/" id="top-cta" class="px-4 py-2.5 sm:px-5 sm:py-3">
+            <span>Go back home</span>
+            <Icon name="heroicons:chevron-right-16-solid" class="h-4 w-4" />
+          </Button>
+        </div>
+      </div>
+    </Container>
+
+    <Footer cta={false} />
+  </HeroContainer>
+</RootLayout>

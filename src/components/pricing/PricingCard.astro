@@ -1,0 +1,114 @@
+---
+import StarField from '@components/shared/StarField.astro'
+import Button from '@components/shared/Button.astro'
+import { Image } from 'astro:assets'
+import spaceSpotlight from '@images/space-spotlight.png'
+
+interface Feature {
+  label: string
+  description: string
+}
+
+interface Price {
+  monthly: string
+  annually: string
+}
+
+interface PricingPlan {
+  title: string
+  price: Price
+  description: string
+  features: Feature[]
+  popular: boolean
+}
+
+interface Props {
+  plan: PricingPlan
+}
+
+// Use the interface for Astro props
+const { plan } = Astro.props
+---
+
+<div class="flex-1 rounded-2xl bg-zinc-950/[.01] shadow-inner-blur">
+  <div
+    class="relative flex h-full w-full flex-col overflow-hidden rounded-2xl border border-violet-200/[.06] px-5 py-7 xl:px-7 xl:py-8"
+  >
+    {
+      plan.popular && (
+        <div>
+          <div class="absolute -bottom-32 -left-32 -right-48 -top-64">
+            <Image
+              src={spaceSpotlight}
+              alt=""
+              class="h-full w-full object-contain opacity-60 lg:opacity-70"
+              widths={[420, 768]}
+              sizes={`(max-width: 420px) 420px, (min-width: 420px) 768px`}
+            />
+          </div>
+
+          {/* Stars */}
+          <div
+            class="absolute bottom-[60%] left-[40%] right-0 top-0 -z-10"
+            aria-hidden="true"
+          >
+            <StarField density="high" maxRadius={2} />
+          </div>
+
+          {/* Popular badge */}
+          <div class="absolute right-4 top-4 flex items-center rounded-full bg-zinc-950/[.01] shadow-inner-blur">
+            <div class="flex h-full w-full items-center space-x-2 rounded-full border border-violet-200/[.06] px-4 py-1.5">
+              <span class="text-xs font-medium leading-4 text-violet-100 drop-shadow-[-12px_-4px_6px_rgba(237,233,254,0.2)]">
+                Most popular
+              </span>
+            </div>
+          </div>
+        </div>
+      )
+    }
+
+    <div class="flex-1">
+      <p class="text-base font-semibold text-white">
+        {plan.title}
+      </p>
+      <div class="mt-2.5 flex items-start space-x-3">
+        <span
+          class="relative inline-block text-nowrap text-5xl font-semibold leading-[1.125]"
+          data-monthly-price={plan.price.monthly}
+          data-annually-price={plan.price.annually}
+        >
+          <span
+            class="relative z-10 bg-gradient-to-b from-violet-400 via-violet-400 to-violet-500 bg-clip-text text-transparent"
+          >
+            <span
+              x-text="billingType === 'monthly' ? $el.parentNode.parentNode.dataset.monthlyPrice : $el.parentNode.parentNode.dataset.annuallyPrice"
+              >{plan.price.monthly}</span
+            >
+          </span>
+          <span
+            class="absolute -top-px left-0 -z-10 text-violet-300"
+            x-text="billingType === 'monthly' ? $el.parentNode.dataset.monthlyPrice : $el.parentNode.dataset.annuallyPrice"
+          >
+            {plan.price.monthly}
+          </span>
+        </span>
+        <span
+          class="mt-0.5 flex flex-col text-sm font-medium text-violet-100/75"
+        >
+          <span>per user</span>
+          <span>per month</span>
+        </span>
+      </div>
+      <p class="mt-4 text-[17px] leading-7 text-zinc-300">
+        {plan.description}
+      </p>
+    </div>
+
+    <Button
+      variant={plan.popular ? 'primary' : 'secondary'}
+      class="mt-8 w-full py-4 text-base leading-none sm:py-4"
+    >
+      Buy this plan
+    </Button>
+  </div>
+</div>

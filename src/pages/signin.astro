@@ -1,0 +1,74 @@
+---
+import AuthLayout from '@layouts/AuthLayout.astro'
+import Container from '@components/shared/Container.astro'
+import ContainerOutline from '@components/shared/ContainerOutline.astro'
+import FormHeader from '@components/auth/FormHeader.astro'
+import Button from '@components/shared/Button.astro'
+import TextField from '@components/forms/TextField.astro'
+
+import { Icon } from 'astro-icon/components'
+import { SITE } from '@config'
+---
+
+<AuthLayout
+  title={`Sign in - ${SITE.title}`}
+  description="Access your Nebula account by signing in. Enjoy seamless remote work collaboration and tools."
+>
+  <Container class="max-w-lg py-5">
+    <div class="relative z-10 flex flex-col shadow-inner-blur">
+      <ContainerOutline />
+      <FormHeader
+        title="Welcome back"
+        description="Fill in the details below to sign in."
+      />
+      <div class="mt-8 flex w-full items-center px-10">
+        <div
+          class="h-px flex-1 bg-gradient-to-r from-violet-200/5 to-violet-200/10"
+        >
+        </div>
+        <h4 class="flex-shrink-0 px-4 text-xs text-violet-100/75">
+          or sign in with
+        </h4>
+        <div
+          class="h-px flex-1 bg-gradient-to-r from-violet-200/10 to-violet-200/5"
+        >
+        </div>
+      </div>
+      <form action="#" method="POST" class="mt-9 px-6 pb-10 sm:px-10">
+        <div class="space-y-8">
+          <TextField
+            label="Email"
+            name="email"
+            type="email"
+            auto-complete="email"
+            placeholder="johnnybravo@gmail.com"
+            required
+          />
+
+          <TextField
+            name="password"
+            type="password"
+            label="Password"
+            link={{ href: '/password-reset', text: 'Forgot password?' }}
+            autocomplete="current-password"
+            placeholder="Password (min. 6 characters)"
+            required
+          />
+        </div>
+
+        <div class="mt-10 flex items-center justify-between space-x-4 sm:mt-12">
+          <p class="text-sm text-violet-100/75">
+            Don’t have an account? <a
+              class="text-violet-300/80 underline duration-200 ease-in-out hover:text-violet-300"
+              href="/signup">Sign up</a
+            >
+          </p>
+          <Button type="submit" class="sm:px-5">
+            <span>Sign in</span>
+            <Icon name="heroicons:chevron-right-16-solid" class="h-4 w-4" />
+          </Button>
+        </div>
+      </form>
+    </div>
+  </Container>
+</AuthLayout>

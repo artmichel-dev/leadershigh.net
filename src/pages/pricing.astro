@@ -1,0 +1,28 @@
+---
+import RootLayout from '@layouts/RootLayout.astro'
+import HeroContainer from '@components/shared/HeroContainer.astro'
+import PricingHero from '@components/pricing/PricingHero.astro'
+import PricingTable from '@components/pricing/PricingTable.astro'
+import Faq from '@components/shared/Faq.astro'
+import Footer from '@components/shared/Footer.astro'
+import Divider from '@components/shared/Divider.astro'
+import { SITE } from '@config'
+---
+
+<RootLayout
+  title={`Pricing | ${SITE.title}`}
+  description="Nebula offers scalable pricing plans to suit your remote work requirements. Choose the plan that fits your team best."
+>
+  <HeroContainer
+    starField={false}
+    bgGradientClassName="opacity-60 lg:opacity-90 xl:opacity-100"
+  >
+    <PricingHero />
+  </HeroContainer>
+  <Divider />
+  <PricingTable />
+  <Divider />
+  <Faq />
+  <Divider />
+  <Footer />
+</RootLayout>

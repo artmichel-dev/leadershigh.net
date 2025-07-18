@@ -1,16 +1,6 @@
-# Nebula - Next.js SaaS Template
+# Nebula - Astro
 
-Nebula is a modern, dark-themed SaaS template built with Next.js, Tailwind CSS, and TypeScript.
-
-## Features
-
-- Built with Next.js 14, React 18, and TypeScript
-- Fully responsive design
-- Dark theme with cosmic-inspired visuals
-- Tailwind CSS for styling
-- Custom components and layouts
-- Interactive elements and animations
-- SEO-friendly structure
+Nebula - Astro is a modern, dark-themed SaaS template built using Tailwind CSS, Astro.js, Alpine.js, and TypeScript.
 
 ## Getting Started
 
@@ -47,53 +37,89 @@ pnpm dev
 bun dev
 ```
 
-4. Open [http://localhost:3000](http://localhost:3000) in your browser
+4. The template should now be running on [http://localhost:4321](http://localhost:4321).
 
 ## Template Structure
 
-The template follows a standard Next.js structure:
+```text
+/
+├── 📁public # Static assets (favicon, OG image)
+├── 📁src # Source files
+│ ├── 📁components # Reusable UI components
+│ ├── 📁layouts # Page layouts
+│ ├── 📁pages # Astro pages
+│ ├── 📁styles # Global styles
+│ ├── 📁scripts # Custom and vendor scripts
+│ ├── 📁images # Image assets
+│ ├── 📁icons # SVG icons
+│ ├── types.ts # TypeScript type definitions
+│ └── config.ts # Site configuration
+├── astro.config.mjs # Astro configuration
+├── tailwind.config.mjs # Tailwind CSS configuration
+└── tsconfig.json # TypeScript configuration
+```
 
-- `src/app`: Contains the main application pages
-- `src/components`: Reusable React components
-- `src/styles`: Global styles and Tailwind CSS configuration
-- `public`: Static assets like images and icons
+## Typescript
 
-## Customization
+Nebula comes with full Typescript support, offering robust typing and advanced language features. Astro's built-in [support for TypeScript](https://docs.astro.build/en/guides/typescript/) allows for writing typescript directly in Astro components, with benefits such as error prevention at runtime and enhanced code understanding through type definition of components and props.
 
-### Tailwind CSS
+### Typescript configuration
 
-The template uses Tailwind CSS for styling. You can customize the theme in the `tailwind.config.js` file.
+You can find the Typescript configuration at the root of the project: `tsconfig.json`. Our setup follows Astro's guidelines for TypeScript integration, using one of Astro's extendable `tsconfig.json` templates. We've chosen the 'strict' template for its balance between strictness and flexibility, and because it is the template recommended by Astro.
 
-### Components
+In the `tsconfig.json`, we also establish module path aliases, creating shortcuts for imports related to components, images, utility functions, and data, all pointing directly to the `/src` directory. This enables us to use succinct import statements like `import HomeHero from @components/home/HomeHero.astro`, streamlining file referencing and enhancing project readability.
 
-All components are located in the `src/components` directory. You can modify existing components or create new ones as needed.
+### Types Definition
 
-### Pages
+In `src/types.ts`, we define global data types for the site, facilitating consistency and ease of use across various components and modules. This ensures that the data structures used throughout the site are uniform, making the code more maintainable and reducing potential for errors.
 
-Main pages are located in the `src/app` directory. Modify these files to change the content and layout of each page.
+## Sitemap
 
-## Third-Party Libraries
+The template simplifies the creation of a sitemap, aiding search engines like Google in more efficiently crawling your site. We use `@astrojs/sitemap`, Astro's official integration, to automatically generate a sitemap during your project build, outlining all pages of your site.
 
-- [@headlessui/react](https://headlessui.com/): For accessible UI components
-- [@heroicons/react](https://heroicons.com/): For icons
-- [@splidejs/react-splide](https://splidejs.com/): For carousels and sliders
-- [clsx](https://github.com/lukeed/clsx): For conditional CSS class names
-- [geist](https://github.com/vercel/geist-font): For typography
-- [lodash](https://lodash.com/): For utility functions
-- [shiki](https://shiki.matsu.io/): For syntax highlighting
-- [@svgr/webpack](https://react-svgr.com/): For converting SVGs to React components
+The sitemap generation is configured in the `astro.config.mjs` file. Here, you need to specify the deployment/site URL using the site property. Our template uses the `SITE.website` variable defined in the `src/config.ts` global configuration file for this purpose. Remember to update the website property in `src/config.ts` with your actual production website URL when deploying your site.
 
-## Icons
+```javascript
+// src/config.ts
+export const SITE: Site = {
+  website: 'https://nebula-astro.tailwindawesome.com', // replace this with your deployed domain
+  // ... other site properties
+}
+```
 
-The template uses a combination of [Heroicons](https://heroicons.com/) and [Nucleo icons](https://nucleoapp.com/). Heroicons are imported from the `@heroicons/react` package, while Nucleo icons are included locally in the template under the `src/icons/nucleo` directory.
+## Tailwind CSS
 
-## Images
+Tailwind CSS and its dependencies were installed using [Astro's official Tailwind integration](https://docs.astro.build/en/guides/integrations-guide/tailwind/). If you are not familiar with the Tailwind CSS framework, I would recommend checking out the [Tailwind documentation](https://tailwindcss.com/docs).
 
-Images used in the template are a mix of custom-made graphics and stock photos from Unsplash and Pexels, which are free to use. You can replace these images with your own as needed.
+We've tried to minimize any custom CSS and only rely on Tailwind's utility classes and a few additional classes defined within the `tailwind.config.js` file. This template additionally uses 1 official Tailwind CSS plugin (`@tailwindcss/forms`).
+
+## Site Configuration
+
+Global site settings, including SEO metadata, can be customized in `src/config.ts`.
+
+## Layouts and Components
+
+Customize the layouts in `src/layouts`, and individual components in the `src/components` directory.
 
 ## Fonts
 
-The template uses the Geist and Geist Mono font families, which are included via the `geist` package.
+Nebula uses the Geist Sans and Geist Mono fonts from Vercel. These are loaded via `@fontsource` packages.
+
+## Icons
+
+The icons used for this theme are part of the [Hero Icons](https://heroicons.com/) set that is free to use and published under the [MIT License](https://github.com/tailwindlabs/heroicons/blob/master/LICENSE).
+
+Some of the examples in Nebula use [Nucleo App](https://nucleoapp.com/premium-icons) icons which we have acquired a license for. You are free to use the Nucleo icons included in this template on your projects, but if you are interested in using the rest of their premium icons you can buy a license on their [website](https://nucleoapp.com/).
+
+This template uses [astro-icon](https://github.com/natemoo-re/astro-icon#readme) in order to make using these icons easier. It defines a straightforward Icon component for Astro that allows you to use custom SVG icons (sourced from the `src/icons` directory) or icons from common icon packs, powered by [Iconify](https://iconify.design/).
+
+## Images
+
+All of the images used in the template are free to use and are either from [Unsplash](https://unsplash.com/), [Pexels](https://www.pexels.com/), or custom-made.
+
+## Deployment
+
+The easiest way to deploy your Astro site is either with [Vercel](https://vercel.com/) or [Netlify](https://www.netlify.com/). To learn more you can read Astro's official docs on [deploying with Vercel](https://docs.astro.build/en/guides/deploy/vercel/) or [deploying with Netlify](https://docs.astro.build/en/guides/deploy/netlify/)
 
 ## License
 
@@ -101,19 +127,8 @@ This site template is a commercial product and is licensed under the [Tailwind A
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out their [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+To learn more about Astro, take a look at the following resources you can check their [official documentation](https://docs.astro.build) or jump into their [Discord server](https://astro.build/chat).
 
 ## Additional Help
 
-If you need additional help setting up the template or have any questions, feel free to contact me at <rodrigo@tailwindawesome.com>.
+If you need additional help setting up the template or have any questions, feel free to contact us at <rodrigo@tailwindawesome.com>.

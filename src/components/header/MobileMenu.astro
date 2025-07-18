@@ -1,0 +1,94 @@
+---
+import { Icon } from 'astro-icon/components'
+
+interface Page {
+  label: string
+  href: string
+  icon: string
+}
+
+interface Link {
+  label: string
+  href: string
+}
+
+interface Props {
+  links: Link[]
+  pages: Page[]
+}
+
+const { links, pages } = Astro.props
+---
+
+<div
+  class="absolute inset-x-0 top-[60px] z-40 mx-5 flex justify-center sm:mx-6 md:hidden"
+>
+  <div
+    x-show="mobileMenuOpen"
+    x-transition:enter="duration-300 ease-out"
+    x-transition:enter-start="-translate-y-16 opacity-50 scale-90"
+    x-transition:enter-end="opacity-100 scale-100 translate-y-0"
+    x-transition:leave="duration-150 ease-in"
+    x-transition:leave-start="opacity-100 scale-100 translate-y-0"
+    x-transition:leave-end="opacity-50 scale-90 -translate-y-16"
+    class="z-30 w-full max-w-lg overflow-hidden rounded-xl bg-[#1F1F24]/80 px-5 pb-5 pt-4 shadow-inner-blur backdrop-blur-lg backdrop-brightness-[85%] transition after:absolute after:inset-0 after:rounded-xl after:border after:border-violet-200/[.06] sm:left-6 sm:right-6 sm:mx-6"
+    @click.away="mobileMenuOpen = false"
+  >
+    <div class="relative z-10 flex flex-col divide-y divide-violet-200/5">
+      {
+        links.map((link) => (
+          <a
+            href={link.href}
+            class="px-1.5 pb-2 pt-4 text-[15px] font-medium text-violet-50 drop-shadow-[-4px_-4px_6px_rgba(237,233,254,0.2)] duration-200 ease-in-out hover:text-violet-400/95"
+          >
+            {link.label}
+          </a>
+        ))
+      }
+
+      <div class="block w-full" x-data="{ open: false }">
+        {/* Pages dropdown button */}
+        <button
+          type="button"
+          class="group flex w-full items-center justify-between px-1.5 pb-2 pt-4 text-[15px] font-medium text-violet-50 drop-shadow-[-4px_-4px_6px_rgba(237,233,254,0.2)] duration-200 ease-in-out hover:text-violet-400/95"
+          :class="open ? 'text-violet-400/95' : 'text-violet-50 group-hover:text-violet-400/95'"
+          @click="open = !open"
+          :aria-expanded="open"
+        >
+          <span>Pages</span>
+
+          <Icon
+            name="heroicons:chevron-right-16-solid"
+            class="ml-2 h-4.5 w-4.5 duration-200 ease-in-out"
+            :class="open ? 'rotate-90 text-violet-400/90' : 'text-violet-100/80 group-hover:text-violet-400/80'"
+          />
+        </button>
+        <div
+          class="space-y-1 px-3 pt-0.5"
+          style="display: none"
+          x-show.transition="open"
+          x-collapse
+        >
+          {
+            pages.map((link) => (
+              <a
+                href={link.href}
+                class="group relative z-10 block text-nowrap py-2 text-sm font-medium text-violet-50 drop-shadow-[-4px_-4px_6px_rgba(237,233,254,0.2)] duration-200 ease-in-out hover:text-violet-400/95 hover:drop-shadow-[-4px_-4px_6px_rgba(196,181,253,0.2)]"
+              >
+                <span class="flex items-center">
+                  {link.icon && (
+                    <Icon
+                      name={link.icon}
+                      class="mr-2 h-4 w-4 text-violet-100/60 group-hover:text-violet-300/80"
+                    />
+                  )}
+                  {link.label}
+                </span>
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

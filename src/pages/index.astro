@@ -1,0 +1,32 @@
+---
+import RootLayout from '@layouts/RootLayout.astro'
+import HeroContainer from '@components/shared/HeroContainer.astro'
+import HomeHero from '@components/home/HomeHero.astro'
+import BentoGridSection from '@components/home/BentoGridSection.astro'
+import CodeSnippets from '@components/home/CodeSnippets.astro'
+import Integrations from '@components/home/Integrations.astro'
+import Features from '@components/home/Features.astro'
+import Testimonials from '@components/home/Testimonials.astro'
+import Footer from '@components/shared/Footer.astro'
+import Divider from '@components/shared/Divider.astro'
+import { SITE } from '@config'
+---
+
+<RootLayout
+  title={`Seamless Collaboration Tools for Modern Teams | ${SITE.title}`}
+>
+  <HeroContainer>
+    <HomeHero />
+  </HeroContainer>
+  <Divider />
+  <BentoGridSection />
+  <Divider />
+  <CodeSnippets />
+  <Divider />
+  <Integrations />
+  <Features />
+  <Divider />
+  <Testimonials />
+  <Divider />
+  <Footer />
+</RootLayout>
