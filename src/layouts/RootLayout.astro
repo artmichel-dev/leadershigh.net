@@ -1,11 +1,5 @@
 ---
 import '@styles/styles.css'
-import '@fontsource/geist-sans/400.css'
-import '@fontsource/geist-sans/500.css'
-import '@fontsource/geist-sans/600.css'
-import '@fontsource/geist-sans/700.css'
-import '@fontsource/geist-sans/800.css'
-import '@fontsource/geist-mono/700.css'
 import { SITE } from '@config'
 
 interface Props {
@@ -35,6 +29,11 @@ const socialImageURL = new URL(ogImage ?? SITE.ogImage, Astro.url.origin).href
     <link rel="canonical" href={canonicalURL} />
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    
+    {/* Google Fonts - Noto Sans */}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
     {/* General Meta Tags */}
     <title>{title}</title>
