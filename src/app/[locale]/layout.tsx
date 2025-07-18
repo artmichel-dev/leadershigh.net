@@ -4,6 +4,7 @@ import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
 import { getDictionary, type Locale, languages, isValidLocale, defaultLocale } from '@/lib/i18n'
 import { redirect } from 'next/navigation'
+import { LocaleProvider } from '@/components/shared/LocaleProvider'
 // ❌ REMOVIDO PERMANENTEMENTE: import '@/styles/globals.css'
 // CSS global SOLO debe importarse en el layout raíz (src/app/layout.tsx)
 
@@ -44,14 +45,12 @@ export default function LocaleLayout({ children, params }: Props) {
   const validLocale = params.locale as Locale
   const language = languages[validLocale]
   
+  // ❌ SOLUCIÓN: Solo renderizar children, NO crear nuevos elementos html/body
+  // El layout raíz ya proporciona la estructura html/body
   return (
-    <html
-      lang={validLocale}
-      dir={language.dir}
-      className={clsx('scroll-smooth', GeistSans.variable, GeistMono.variable)}
-    >
-      <body className='bg-zinc-900'>{children}</body>
-    </html>
+    <LocaleProvider locale={validLocale} language={language}>
+      {children}
+    </LocaleProvider>
   )
 }
 
