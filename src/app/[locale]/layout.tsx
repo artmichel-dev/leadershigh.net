@@ -4,7 +4,8 @@ import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
 import { getDictionary, type Locale, languages, isValidLocale, defaultLocale } from '@/lib/i18n'
 import { redirect } from 'next/navigation'
-import '@/styles/globals.css'
+// ❌ REMOVIDO PERMANENTEMENTE: import '@/styles/globals.css'
+// CSS global SOLO debe importarse en el layout raíz (src/app/layout.tsx)
 
 type Props = {
   children: React.ReactNode
