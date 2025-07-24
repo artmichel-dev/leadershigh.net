@@ -18,7 +18,7 @@
     "@splidejs/splide": "^4.1.4",
     "@types/alpinejs": "^3.13.10",
     "alpinejs": "^3.14.1",
-    "astro": "^4.15.4",
+    "astro": "^5.12.3",
     "astro-icon": "^1.1.0",
     "lodash": "^4.17.21",
     "tailwind-merge": "^2.3.0",
@@ -26,8 +26,12 @@
     "typescript": "^5.5.2"
   },
   "devDependencies": {
+    "@astrojs/cloudflare": "^12.6.0",
+    "@astrojs/netlify": "^6.5.3",
+    "@astrojs/vercel": "^8.2.3",
     "@tailwindcss/forms": "^0.5.7",
     "@types/lodash": "^4.17.5",
+    "@types/node": "^24.1.0",
     "prettier": "^3.3.2",
     "prettier-plugin-astro": "^0.14.0",
     "prettier-plugin-tailwindcss": "^0.6.5"
